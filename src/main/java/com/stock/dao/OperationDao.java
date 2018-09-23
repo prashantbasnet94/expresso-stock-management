@@ -25,12 +25,12 @@ public class OperationDao {
 		
 		try {
 			
-			String dateRaw = "06/27/2007";
+			/*String dateRaw = "06/27/2007";
 			DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-			Date date = (Date)formatter.parse(dateRaw);  
+			Date date = (Date)formatter.parse(dateRaw);  */
 			
 			
-			RegistrationDao tempRegis =new RegistrationDao("prashant","basnet","prashantbasn","prashant.basnet@selu.edu",date,"hob33");
+			RegistrationDao tempRegis =new RegistrationDao("prashant","basnet","prashantbast","prashant.basnet@selu.edu",date,"hob33");
 			
 			session.beginTransaction();
 			session.save(tempRegis);

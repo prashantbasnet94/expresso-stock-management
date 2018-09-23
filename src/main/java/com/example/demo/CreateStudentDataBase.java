@@ -26,7 +26,7 @@ public class CreateStudentDataBase {
 				
 				//create a student object
 				System.out.println("create a new studnet object");
-				StockDao tempStudent = new StockDao( 4, "prashant","azela2",0, 0, 0, 0, "1.4b", 0);
+				StockDao tempStudent = new StockDao( 14, "prashant","azela12",0, 0, 0, 0, "1.4b", 0);
 				
 				//start a transaction
 				session.beginTransaction();

@@ -1,12 +1,10 @@
 package com.stock.dao;
 
 
+ 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,7 +16,7 @@ public class RegistrationDao {
 
 
  
-	public RegistrationDao(String first_name, String last_name, String user_id, String email, Date dob,
+	public RegistrationDao(String first_name, String last_name, String user_id, String email, String dob,
 			String password) {
 		this.first_name = first_name;
 		this.last_name = last_name;
@@ -40,9 +38,11 @@ public class RegistrationDao {
 	private String email;
 	
 
-	private Date dob;
+	private String dob;
 	
 	private String password;
+
+ 
 	
 	
 	
