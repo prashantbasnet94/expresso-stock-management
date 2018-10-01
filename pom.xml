@@ -25,6 +25,199 @@
     </properties>
 
     <dependencies>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <!-- Internal -->
+
+            <dependency>
+                <groupId>pl.zankowski</groupId>
+                <artifactId>iextrading4j-api</artifactId>
+                <version>2.2.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>pl.zankowski</groupId>
+                <artifactId>iextrading4j-api</artifactId>
+                <type>test-jar</type>
+                <scope>test</scope>
+                <version>2.2.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>pl.zankowski</groupId>
+                <artifactId>iextrading4j-client</artifactId>
+                <version>2.2.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>pl.zankowski</groupId>
+                <artifactId>iextrading4j-samples</artifactId>
+                <version>2.2.4</version>
+            </dependency>
+
+            <!-- Libraries -->
+
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>2.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.jersey.inject</groupId>
+                <artifactId>jersey-hk2</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-json-jackson</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.datatype</groupId>
+                <artifactId>jackson-datatype-jsr310</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.socket</groupId>
+                <artifactId>socket.io-client</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>25.1-jre</version>
+            </dependency>
+
+            <!-- Required by Java 9+ -->
+
+    
+
+            <dependency>
+                <groupId>javax.activation</groupId>
+                <artifactId>activation</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+
+            <!-- Tests -->
+
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>0.9.11</version>
+                <scope>test</scope>
+            </dependency>
+
+           
+
+            <dependency>
+                <groupId>com.github.tomakehurst</groupId>
+                <artifactId>wiremock-standalone</artifactId>
+                <version>2.18.0</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.flextrade.jfixture</groupId>
+                <artifactId>jfixture</artifactId>
+                <version>2.7.2</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>nl.jqno.equalsverifier</groupId>
+                <artifactId>equalsverifier</artifactId>
+                <version>2.4.7</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>2.19.0</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.10.0</version>
+                <scope>test</scope>
+            </dependency>
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core --><!-- 
 <dependency>
@@ -135,6 +328,12 @@
 		
 		<!--  hibernate3 -->  
 
+<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+<dependency>
+    <groupId>org.aspectj</groupId>
+    <artifactId>aspectjweaver</artifactId>
+    <version>1.9.1</version>
+</dependency>
 
 
 
