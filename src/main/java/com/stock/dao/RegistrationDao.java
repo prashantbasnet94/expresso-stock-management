@@ -16,15 +16,6 @@ public class RegistrationDao {
 
 
  
-	public RegistrationDao(String first_name, String last_name, String user_id, String email, String dob,
-			String password) {
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.user_id = user_id;
-		this.email = email;
-		this.dob = dob;
-		this.password = password;
-	}
 
 	private String first_name;
 	
@@ -42,7 +33,16 @@ public class RegistrationDao {
 	
 	private String password;
 
- 
+
+	public RegistrationDao(String first_name, String last_name, String user_id, String email, String dob,
+			String password) {
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.user_id = user_id;
+		this.email = email;
+		this.dob = dob;
+		this.password = password;
+	}
 	
 	
 	

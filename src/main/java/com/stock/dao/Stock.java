@@ -1,10 +1,11 @@
 package com.stock.dao;
 
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+ 
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -23,22 +24,22 @@ public class Stock {
 	private String ticker;
 	
 	@Column(name="min")
-	private double min;
+	private BigDecimal min;
 	
 	@Column(name="max")
-	private double max;
+	private BigDecimal max;
 	
 	@Column(name="p_change")
-	private double p_change;
+	private BigDecimal p_change;
 	
 	@Column(name="total_stock_supply")
-	private long total_stock_supply;
+	private BigDecimal total_stock_supply;
 	
 	@Column(name="total_market_cap")
-	private String total_market_cap;
+	private BigDecimal total_market_cap;
 	
 	@Column(name="price")
-	private double price;
+	private BigDecimal price;
 
 	public int getRanking() {
 		return ranking;
@@ -64,56 +65,56 @@ public class Stock {
 		this.ticker = ticker;
 	}
 
-	public double getMin() {
+	public BigDecimal getMin() {
 		return min;
 	}
 
-	public void setMin(double min) {
+	public void setMin(BigDecimal min) {
 		this.min = min;
 	}
 
-	public double getMax() {
+	public BigDecimal getMax() {
 		return max;
 	}
 
-	public void setMax(double max) {
+	public void setMax(BigDecimal max) {
 		this.max = max;
 	}
 
-	public double getP_change() {
+	public BigDecimal getP_change() {
 		return p_change;
 	}
 
-	public void setP_change(double p_change) {
+	public void setP_change(BigDecimal p_change) {
 		this.p_change = p_change;
 	}
 
-	public long getTotal_stock_supply() {
+	public BigDecimal getTotal_stock_supply() {
 		return total_stock_supply;
 	}
 
-	public void setTotal_stock_supply(long total_stock_supply) {
+	public void setTotal_stock_supply(BigDecimal total_stock_supply) {
 		this.total_stock_supply = total_stock_supply;
 	}
 
-	public String getTotal_market_cap() {
+	public BigDecimal getTotal_market_cap() {
 		return total_market_cap;
 	}
 
-	public void setTotal_market_cap(String total_market_cap) {
+	public void setTotal_market_cap(BigDecimal total_market_cap) {
 		this.total_market_cap = total_market_cap;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
-	public Stock(int ranking, String name, String ticker, double min, double max, double p_change,
-			long total_stock_supply, String total_market_cap, double price) {
+	public Stock(int ranking, String name, String ticker, BigDecimal min, BigDecimal max, BigDecimal p_change,
+			BigDecimal total_stock_supply, BigDecimal total_market_cap, BigDecimal price) {
 	 
 		this.ranking = ranking;
 		this.name = name;
