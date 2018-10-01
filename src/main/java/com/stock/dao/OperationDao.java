@@ -1,4 +1,4 @@
-package com.stock.dao;
+/*package com.stock.dao;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,9 +25,9 @@ public class OperationDao {
 		
 		try {
 			
-			/*String dateRaw = "06/27/2007";
+			String dateRaw = "06/27/2007";
 			DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-			Date date = (Date)formatter.parse(dateRaw);  */
+			Date date = (Date)formatter.parse(dateRaw);  
 			
 			
 			RegistrationDao tempRegis =new RegistrationDao("prashant","basnet","prashantbast","prashant.basnet@selu.edu",date,"hob33");
@@ -38,7 +38,7 @@ public class OperationDao {
 			session.getTransaction().commit();
 			
 			
-			/*
+			
 			 	System.out.println("create a new studnet object");
 				StockDao tempStudent = new StockDao( 4, "prashant","azela2",0, 0, 0, 0, "1.4b", 0);
 				
@@ -52,7 +52,7 @@ public class OperationDao {
 				
 				//comit transaction
 				session.getTransaction().commit();
-			 */
+			 
 			 
 		}catch(Exception e){
 			e.printStackTrace();
@@ -64,3 +64,4 @@ public class OperationDao {
 			
 
 }
+*/
