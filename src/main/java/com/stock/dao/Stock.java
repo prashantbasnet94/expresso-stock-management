@@ -13,13 +13,17 @@ import javax.persistence.Table;
 @Table(name="Stock")
 public class Stock {
 	
- @Id
+	public Stock() {
+		
+	}
+
 	@Column(name="ranking")
 	private int ranking;
 	
 	@Column(name="name")
 	private String name;
 	
+	 @Id
 	@Column(name="ticker")
 	private String ticker;
 	

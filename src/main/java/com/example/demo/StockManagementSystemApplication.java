@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
  
-@ComponentScan(basePackages = { "com.stock.Controllers"} )
+@ComponentScan(basePackages = { "com.stock.Controllers","com.stock.restController"} )
 
 public class StockManagementSystemApplication {
 
