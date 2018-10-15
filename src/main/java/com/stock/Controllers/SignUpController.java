@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.stock.dao.HibernateOperator;
@@ -22,6 +24,7 @@ import com.stock.dao.RegistrationDao;
 import com.stock.dao.UserImplements;
 
 @Controller
+@RequestMapping("user")
 public class SignUpController {
 	private HibernateOperator hibernateOperator;
 
@@ -38,11 +41,14 @@ public class SignUpController {
 	
 	
 
-	
-	@RequestMapping("/authenticate")
-	public String processForm(HttpServletRequest request,
+	@PostMapping(path = "authenticate")
+	public String processForm(
+			@RequestBody String name,
+			HttpServletRequest request,
 			@Valid @ModelAttribute("data") UserImplements theRegis,
-			BindingResult theBindingResult) {
+			BindingResult theBindingResult
+			) {
+		System.out.println("data is here ----------------------------------------------------------" + name);
 	 
 		if (theBindingResult.hasErrors()) {
 			System.out.println(theBindingResult.toString());

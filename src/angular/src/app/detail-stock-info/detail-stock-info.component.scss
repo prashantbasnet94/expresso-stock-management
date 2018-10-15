@@ -1,0 +1,16 @@
+.details{
+  max-width: 80%;
+  margin: 5% 10%;
+}
+.col:first-child{
+  max-height: 100% !important;
+}
+app-graph{
+  max-width: 500px;
+}
+ul{
+  li{
+    list-style: none;
+    font-size: 20px;
+  }
+}

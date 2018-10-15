@@ -1,0 +1,33 @@
+    <div class="tableDiv">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <!--<th class="ranking" scope="col">#</th>-->
+        <th class="name" scope="col">Name</th>
+        <th class="ticker" scope="col">Ticker</th>
+        <th class="lastprice" scope="col">Last Price</th>
+        <th class="perChange" scope="col">%</th>
+        <th class="high" scope="col">24 hours high</th>
+        <th class="low" scope="col">24 hours low</th>
+        <th class="graph" scope="col">Price Chart 1d</th>
+        <th class="marketcap" scope="col">Market Cap</th>
+        <th class="totalsupply" scope="col">Total Supply</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="pointerCursor" *ngFor="let stock of stocks" (click)="onClick(stock.ticker)">
+        <!--<td scope="row" class="ranking">{{stock.ranking}}</td>-->
+        <td class="name">{{stock.name}}</td>
+        <td class="ticker">{{stock.ticker}}</td>
+        <td class="lastprice">${{stock.price}}</td>
+        <td class="perChange">{{stock.p_change}}%</td>
+        <td class="high">${{stock.max}}</td>
+        <td class="low">${{stock.min}}</td>
+        <td class="graph">TBD</td>
+        <td class="marketcap">{{stock.total_market_cap}}</td>
+        <td class="totalsupply">{{stock.total_stock_supply}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+    </div>

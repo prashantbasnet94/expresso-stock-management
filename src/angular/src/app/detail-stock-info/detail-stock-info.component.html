@@ -1,0 +1,71 @@
+<div class="details">
+  <h1>{{stock.companyName}}</h1>
+  <div class="row">
+    <div class="col">
+      <app-graph></app-graph>
+      <p>Graphical representation of data from last 7 days.</p>
+    </div>
+    <div class="col">
+      <h2>Stock Info:</h2>
+
+      <ul>
+        <li>
+          <strong>Company Name: </strong> {{stock.companyName}}
+        </li>
+
+        <li>
+          <strong>Sector: </strong> {{stock.sector}}
+        </li>
+        <li>
+          <strong>Symbol: </strong> {{stock.symbol}}
+        </li>
+        <li>
+          <strong>Primary Exchange: </strong> {{stock.primaryExchange}}
+        </li>
+        <li>
+          <strong>Market Cap:</strong> ${{stock.marketCap}}
+        </li>
+      </ul>
+      <h2>Stock Stats:</h2>
+      <ul>
+        <li>
+          <strong>Price: </strong>${{stock.latestPrice}}
+        </li>
+        <li>
+          <strong>Today's Highest: </strong> ${{stock.high}}
+        </li>
+        <li>
+          <strong>Today's Lowest: </strong> ${{stock.low}}
+        </li>
+         <li>
+          <strong>% Change: </strong>{{stock.changePercent}}
+        </li>
+
+        <li>
+          <strong>52 Week Highest: </strong> ${{stock.week52High}}
+        </li>
+        <li>
+          <strong>52 Week Lowest: </strong> ${{stock.week52Low}}
+        </li>
+        <li>
+          <strong>Previous Close: </strong>{{stock.previousClose}}
+        </li>
+        <li>
+          <strong>Total Average Volume: </strong>{{stock.avgTotalVolume}}
+        </li>
+        <li>
+          <strong>Last Updated: </strong>{{stock.latestUpdate | timeDate}}
+        </li>
+        <li>
+          <strong>Delayed Price: </strong>${{stock.delayedPrice }}
+        </li>
+        <li>
+          <strong>Delayed Price Time: </strong>{{stock.delayedPriceTime | timeDate}}
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
+</div>
+
