@@ -1,111 +1,96 @@
 package com.stock.Controllers;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.stock.dao.HibernateOperator;
-import com.stock.dao.RegistrationDao;
-import com.stock.dao.UserImplements;
+import com.stock.dao.User;
+import com.stock.service.StockService;
+import com.stock.service.UserService;
 
 @Controller
 @RequestMapping("user")
 public class SignUpController {
-	private HibernateOperator hibernateOperator;
+//	private HibernateOperator hibernateOperator;
 
+ 
+
+	
+	@Autowired
+	@Qualifier("stockService")
+	StockService stockService;
+	
+	@Autowired
+	UserService userService;
 
 	@GetMapping("/signUp")
 	public String SignUp(Model  model) {
-		System.out.println("<------------------------------------------------------");
+	
 
-		UserImplements tempRegis = new UserImplements( );
-		model.addAttribute("data",tempRegis);
+	//	UserImplements tempRegis = new UserImplements( );
+	//	model.addAttribute("data",tempRegis);
 		return "signUp";
 		
 	}
-	
-	
 
-	@PostMapping(path = "authenticate")
+ 
+	
+	@PostMapping("/authenticate")
 	public String processForm(
-			@RequestBody String name,
-			HttpServletRequest request,
-			@Valid @ModelAttribute("data") UserImplements theRegis,
-			BindingResult theBindingResult
-			) {
-		System.out.println("data is here ----------------------------------------------------------" + name);
+			 HttpServletRequest request,Model model, @Valid @ModelAttribute("data") User user,
+			BindingResult theBindingResult) {
+		
 	 
-		if (theBindingResult.hasErrors()) {
-			System.out.println(theBindingResult.toString());
-			return "signUp";
+		System.out.println(user.getFirst_name());
+		System.out.println(user.getLast_name());
+		//System.out.println(request.getParameter("username"));
+		System.out.println(user.getUsername());
+		System.out.println("<------------------------------------------------------" + user);
+		System.out.println(user.getEmail());
+
+		if(userService.checkUserExists(user.getUsername(),user.getEmail())){
+			System.out.println(" >>>>>>>>>>>> if(userService.checkUserExists(theRegis.getUsername(),theRegis.getEmail())){");
+			if(userService.checkUserIdExists(user.getUsername())){
+				
+				model.addAttribute("user_idExists",true);
+				System.out.println("User_id already exist");
+				System.out.println("<------------------------------------------------------");
+			}  if(userService.checkEmailExists(user.getEmail())) {
+				model.addAttribute("emailExists",true);
+				System.out.println("email already exist");
+				System.out.println("<------------------------------------------------------");
+			}
+			
+			
+		}else {
+				System.out.println("Userid is unique");
+				System.out.println("<------------------------------------------------------");
+				
+				System.out.println(userService.createUser(user));
+			
 		}
-		else {
-			
-			
-			System.out.println("----------------------------about to save -------------------------");
-			hibernateOperator.save(request, theRegis);
-			return "login";
-		}
-			
-		 
+				
 		
-		 
-		 
+	return "/login";
+	 
 	}
-
+ 
 	
 	
 	
 	
 	
+ 
+	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	
-	@RequestMapping("/authenticate")
-	public String authenticate( HttpServletRequest request, Model model) {
-		
-
-		
-		String firstName =request.getParameter("firstName");
-	
-		
-
-		System.out.println();
-	
-		 return"index";
-	
-	}*/
-	
-	
-	
-}

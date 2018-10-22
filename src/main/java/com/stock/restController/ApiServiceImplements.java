@@ -7,16 +7,16 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Component;
 
-import com.stock.dao.Stock;
+import com.stock.dao.StockIndex;
 @Component
 public class ApiServiceImplements implements ApiService{
 
 	@Override
-	public List<Stock> getQuote() {
+	public List<StockIndex> getQuote() {
 	 //starting factory
 		SessionFactory factory = new Configuration()
 										.configure("hibernate.cfg.xml")
-										.addAnnotatedClass(Stock.class)
+										.addAnnotatedClass(StockIndex.class)
 										.buildSessionFactory();
 		
 //starting session
@@ -25,7 +25,7 @@ public class ApiServiceImplements implements ApiService{
 		
 		session.beginTransaction();
 		
-		List<Stock> quote =session.createQuery("from Stock").getResultList();
+		List<StockIndex> quote =session.createQuery("from Stock").getResultList();
 		
 		session.getTransaction().commit();
 		

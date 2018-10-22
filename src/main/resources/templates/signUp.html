@@ -14,7 +14,7 @@
 welcome to the sign up page!
 
 
-<form method ="post" action="/authenticate" modelAttribute="data">
+<form method ="post" action="/user/authenticate" modelAttribute="data">
   <div class="container">
     <h1>Register</h1>
     <p>Please fill in this form to create an account.</p>
@@ -29,8 +29,8 @@ welcome to the sign up page!
     <input type="text" placeholder="Enter Last Name" name="last_name" required>
 
 
-    <label for="user_id"><b>UserId</b></label>
-    <input type="text" placeholder="Enter new UserID" name="user_id" required>
+    <label for="username"><b>UserId</b></label>
+    <input type="text" placeholder="Enter new UserID" name="username" required>
 
     <label for="email"><b>Email</b></label>
     <input type="text" placeholder="Enter Email" name="email" required>

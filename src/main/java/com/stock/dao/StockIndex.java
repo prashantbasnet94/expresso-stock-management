@@ -11,9 +11,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Stock")
-public class Stock {
+public class StockIndex {
 	
-	public Stock() {
+	public StockIndex() {
 		
 	}
 
@@ -117,7 +117,7 @@ public class Stock {
 		this.price = price;
 	}
 
-	public Stock(int ranking, String name, String ticker, BigDecimal min, BigDecimal max, BigDecimal p_change,
+	public StockIndex(int ranking, String name, String ticker, BigDecimal min, BigDecimal max, BigDecimal p_change,
 			BigDecimal total_stock_supply, BigDecimal total_market_cap, BigDecimal price) {
 	 
 		this.ranking = ranking;
