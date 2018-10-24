@@ -46,11 +46,7 @@ public class BeanConfiguration {
 	public UserService userService() {
 		return new UserServiceImplementation();
 	}
-	
-	/*@Bean
-	public UserSecurityService userSecurityService() {
-		return new UserSecurityService();
-	}*/
+
 	 
 	
 }

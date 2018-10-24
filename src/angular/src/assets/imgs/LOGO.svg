@@ -2,12 +2,12 @@
   <defs>
     <style>
       .cls-1, .cls-2 {
-        fill: #474233;
+        fill: #ffffff;
       }
 
       .cls-1 {
         font-size: 90px;
-        font-family: TwCenMT-Condensed, Tw Cen MT;
+        font-family: Cambria;
       }
 
       .cls-2 {

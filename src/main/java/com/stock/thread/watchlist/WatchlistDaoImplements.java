@@ -7,7 +7,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+ 
 import org.springframework.context.annotation.Bean;
+ 
+ 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +29,7 @@ public class WatchlistDaoImplements implements WatchlistDao{
  
  
 	public List<StockWatchlist> extended(String ticker) {
-		
-		
-		
+ 
 		
 		final IEXTradingClient iexTradingClient = IEXTradingClient.create();
 		
@@ -104,25 +105,11 @@ public class WatchlistDaoImplements implements WatchlistDao{
 		
 		factory.close();
 		return watchlistQuote;
+ 
 	}
 
 
-
-	@Override
-	public List<StockWatchlist> createQuoteWatchlist(String ticker) {
-		
-		// TODO Auto-generated method stub
-		
-			 
-				//SaveToDatabase saveToDatabase = new SaveToDatabase(ticker);
-			//	thread1 = new Thread(saveToDatabase);
-			//	thread1.start();
-				
-				
-				
-				return extended(ticker);
-				
-	}
+ 
 
 
 
@@ -161,6 +148,26 @@ public class WatchlistDaoImplements implements WatchlistDao{
 		return watchlistQuote;
 		
 	}
+ 
+
+
+
+	@Override
+	public List<StockWatchlist> createQuoteWatchlist(String ticker) {
+		
+		// TODO Auto-generated method stub
+		
+			 
+				//SaveToDatabase saveToDatabase = new SaveToDatabase(ticker);
+			//	thread1 = new Thread(saveToDatabase);
+			//	thread1.start();
+				
+				
+				
+				return extended(ticker);
+				
+	}
+ 
 	 
 
 }

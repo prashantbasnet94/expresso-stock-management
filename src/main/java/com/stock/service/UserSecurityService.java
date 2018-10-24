@@ -1,4 +1,4 @@
-/*package com.stock.service;
+package com.stock.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +15,12 @@ import com.stock.dao.User;
 
 @Service
 public class UserSecurityService implements UserDetailsService {
-	@Bean
+	/*@Bean
 	public UserSecurityService userSecurityService() {
 		return new UserSecurityService();
-	}
+	}*/
 	
-    *//** The application logger *//*
+    /** The application logger */
     private static final Logger LOG = LoggerFactory.getLogger(UserSecurityService.class);
 
     @Autowired
@@ -36,4 +36,3 @@ public class UserSecurityService implements UserDetailsService {
         return user;
     }
 }
-*/

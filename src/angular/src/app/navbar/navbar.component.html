@@ -1,7 +1,7 @@
-<div>
+<div class="navBar">
   <mdb-navbar SideClass="navbar navbar-expand-lg" >
 
-    <mdb-navbar-brand><a class="navbar-brand" href="#">
+    <mdb-navbar-brand><a class="navbar-brand ml-1" href="#">
       <img class="logo" src="../../assets/imgs/LOGO.svg" height="50" width= "200" alt="Logo">
     </a></mdb-navbar-brand>
 
@@ -17,21 +17,17 @@
         <li class="nav-item">
           <a class="nav-link waves-light" mdbWavesEffect routerLink="watchlist">Watchlist</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link waves-light" mdbWavesEffect routerLink="forum">Forum</a>
-        </li>
+        <!--<li class="nav-item">-->
+          <!--<a class="nav-link waves-light" mdbWavesEffect routerLink="forum">Forum</a>-->
+        <!--</li>-->
       </ul>
       <!-- Search form -->
-      <form class="form-inline waves-light" mdbWavesEffect>
-        <div class="md-form mt-6">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-        </div>
-      </form>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
+
+      <ul id="login-register" class="navbar-nav mr-sm-2">
+        <li id="login" class="nav-item mr-sm-2" >
           <a class="nav-link waves-light" routerLink="login">Login</a>
         </li>
-        <li class="nav-item">
+        <li id="register" class="nav-item mr-sm-2" >
           <a class="nav-link waves-light" routerLink="register">Register</a>
         </li>
       </ul>

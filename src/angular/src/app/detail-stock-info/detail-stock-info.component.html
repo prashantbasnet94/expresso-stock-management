@@ -1,11 +1,17 @@
-<div class="details">
+<div class="details" *ngIf="stockLoaded">
   <h1>{{stock.companyName}}</h1>
   <div class="row">
     <div class="col">
-      <app-graph></app-graph>
+      <app-graph [dataset]="graphData" [dataLabel]="graphLabel"></app-graph>
       <p>Graphical representation of data from last 7 days.</p>
+      <div >
+        <button type="button" class="btn btn-primary"> Add to Watchlist</button>
+        <button type="button" class="btn btn-default" [disabled]="true" > Add to Portfolio</button>
+      </div>
     </div>
+
     <div class="col">
+      <img src="{{logo.url}}" aria-hidden="true">
       <h2>Stock Info:</h2>
 
       <ul>
@@ -23,9 +29,10 @@
           <strong>Primary Exchange: </strong> {{stock.primaryExchange}}
         </li>
         <li>
-          <strong>Market Cap:</strong> ${{stock.marketCap}}
+          <strong>Market Cap:</strong> ${{stock.marketCap.toLocaleString()}}
         </li>
       </ul>
+
       <h2>Stock Stats:</h2>
       <ul>
         <li>
@@ -37,8 +44,15 @@
         <li>
           <strong>Today's Lowest: </strong> ${{stock.low}}
         </li>
+<<<<<<< HEAD
+        <li>
+          <strong>Percentage Change: </strong>
+          <strong [appPercentChange]="stock.changePercent">{{(stock.changePercent*100).toLocaleString()}}%
+          </strong>
+=======
          <li>
-          <strong>% Change: </strong>{{stock.changePercent}}
+          <strong>% Change: </strong>{{(stock.changePercent*100).toLocaleString(undefined, {maximumFractionDigits: 3} )}} %
+>>>>>>> master
         </li>
 
         <li>
@@ -51,7 +65,7 @@
           <strong>Previous Close: </strong>{{stock.previousClose}}
         </li>
         <li>
-          <strong>Total Average Volume: </strong>{{stock.avgTotalVolume}}
+          <strong>Total Average Volume: </strong>{{stock.avgTotalVolume.toLocaleString()}}
         </li>
         <li>
           <strong>Last Updated: </strong>{{stock.latestUpdate | timeDate}}
@@ -64,8 +78,12 @@
         </li>
 
       </ul>
-
     </div>
   </div>
 </div>
+
+<!--<div>-->
+  <!--<app-loader></app-loader>-->
+<!--</div>-->
+
 

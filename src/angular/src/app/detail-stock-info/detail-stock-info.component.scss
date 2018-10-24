@@ -6,11 +6,21 @@
   max-height: 100% !important;
 }
 app-graph{
-  max-width: 500px;
+  min-width: 600px;
+}
+
+app-graph.canvas{
+  min-width: 600px;
 }
 ul{
   li{
     list-style: none;
     font-size: 20px;
   }
+}
+
+
+div.card{
+  width: 400px;
+  height: 400px;
 }

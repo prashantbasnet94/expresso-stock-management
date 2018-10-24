@@ -17,6 +17,14 @@ import {ForumPageComponent} from './forum-page/forum-page.component';
 import {GraphComponent} from './graph/graph.component';
 import {DetailStockInfoComponent} from './detail-stock-info/detail-stock-info.component';
 import {TimeDatePipe} from './Pipes/time-date.pipe';
+import {PricePipePipe} from './Pipes/price-pipe.pipe';
+import {PercentChangeDirective} from './directives/percent-change.directive';
+import {NgxPaginationModule} from 'ngx-pagination';
+<<<<<<< HEAD
+import {PercentIconPipe} from './Pipes/percent-icon.pipe';
+=======
+import { LoaderComponent } from './loader/loader.component';
+>>>>>>> master
 
 @NgModule({
   declarations: [
@@ -30,14 +38,22 @@ import {TimeDatePipe} from './Pipes/time-date.pipe';
     ForumPageComponent,
     GraphComponent,
     DetailStockInfoComponent,
-    TimeDatePipe
+    TimeDatePipe,
+    PricePipePipe,
+    PercentChangeDirective,
+<<<<<<< HEAD
+    PercentIconPipe
+=======
+    LoaderComponent
+>>>>>>> master
   ],
   imports: [
     BrowserModule,
     FormsModule,
     MDBBootstrapModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [],

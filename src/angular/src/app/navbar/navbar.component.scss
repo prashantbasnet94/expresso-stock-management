@@ -1,17 +1,29 @@
-div {
-  background: #aacdcc;
-}
-a{
-  color: #474233;
-}
-//aacdcc
-.nav-item{
-  margin: 0px 15px;
+div.navBar {
+  font-family: Cambria, Arial, sans-serif;
+  background: linear-gradient(to bottom ,rgb(21, 100, 191), rgb(22, 143, 247));
+  font-size: 20px;
 }
 
-.navbar{
-  margin: 0px 50px 0 15px;
+a {
+  color: #ebebeb;
 }
-div.container{
+
+div.container {
   margin: 0 !important;
+}
+
+ul#login-register {
+  font-size: 16px;
+  float: end;
+  margin: 0 0 0 200px;
+}
+
+li.nav-item:hover {
+  background: linear-gradient(to bottom ,rgb(21, 100, 191), rgb(110, 173, 247));
+}
+
+li.nav-item{
+  align-content: center;
+  border-left: 2px solid rgba(250,250,250,0.2);
+  padding: 0 20px;
 }

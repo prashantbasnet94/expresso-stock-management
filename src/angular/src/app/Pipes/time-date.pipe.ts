@@ -8,7 +8,6 @@ export class TimeDatePipe implements PipeTransform {
   transform(value: any, args?: any): any {
       var d = new Date(value);
       let date = d.toLocaleDateString() + " " + d.toLocaleTimeString();
-      console.log(date);
     return date;
   }
 

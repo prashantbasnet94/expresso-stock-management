@@ -55,7 +55,9 @@ public class StockImplementation implements StockService {
 
 	@Override
 	public  List<com.stock.dao.StockWatchlist> createQuoteWatchlist(String ticker) {
-	
+ 
+		System.out.println("9999999999999999999999999999999999");
+ 
 		return stockDao.createQuoteWatchlist(ticker);
 	}
 

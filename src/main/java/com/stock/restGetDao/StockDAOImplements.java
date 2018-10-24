@@ -6,11 +6,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
+ 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import com.stock.dao.StockIndex;
 import com.stock.dao.StockWatchlist;
+ 
+import org.springframework.stereotype.Repository;
+
+import com.stock.dao.StockIndex;
+ 
 import com.stock.thread.watchlist.WatchlistDao;
 
 import pl.zankowski.iextrading4j.api.stocks.Quote;
@@ -98,11 +104,13 @@ private WatchlistDao watchlistDao;
 		
 		System.out.println("++++++++++++++++++++++++++++" +ticker);
 	return watchlistDao.createQuoteWatchlist(ticker);
+ 
 	}
 
 	@Override
 	public List<StockWatchlist> createQuoteWatchlist() {
 		// TODO Auto-generated method stub
 		return watchlistDao.createQuoteWatchlist( );
+ 
 	}
 }

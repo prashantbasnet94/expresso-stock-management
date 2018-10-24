@@ -9,7 +9,7 @@ import pl.zankowski.iextrading4j.api.stocks.Quote;
 public interface WatchlistDao {
 
 	List<StockWatchlist> createQuoteWatchlist(String ticker);
-
+ 
 	List<StockWatchlist> createQuoteWatchlist();
 
  

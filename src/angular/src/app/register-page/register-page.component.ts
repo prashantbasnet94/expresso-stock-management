@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../types/user';
-import {HttpClient} from '@angular/common/http';
-import {ExpressoService} from '../expresso.service';
+import {ExpressoService} from '../services/expresso.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
@@ -15,29 +15,28 @@ export class RegisterPageComponent implements OnInit {
     password: '',
     first_name: '',
     last_name: '',
-    user_id: '',
+    username: '',
     dob: '',
   };
-  confirmPassword: string;
+  confirmPassword: string = '';
 
 
-  constructor(private expressoService: ExpressoService) {
+  constructor(private expresso: ExpressoService, private route: Router) {
   }
 
   ngOnInit() {
   }
 
-  sendUser() {
-    this.expressoService.signUp(this.user);
+  register() {
+    this.route.navigate(['login']).then(() => {
+      this.expresso.signUp(this.user).subscribe(() => {
+      });
+    });
   }
+
 
   validPassword() {
     return this.user.password.length > 0 && this.user.password !== this.confirmPassword;
-  }
-
-  register() {
-    console.log(this.user);
-    console.log('User Registered');
   }
 
 }

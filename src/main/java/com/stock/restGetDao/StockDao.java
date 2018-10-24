@@ -16,6 +16,8 @@ public interface StockDao {
 	Quote getQuoteDetails(String ticker);
 	
 	List<StockWatchlist> createQuoteWatchlist(String ticker);
+ 
 
 	List<StockWatchlist> createQuoteWatchlist();
+ 
 }

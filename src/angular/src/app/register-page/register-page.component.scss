@@ -1,8 +1,18 @@
-.register-box{
+body, html {
+  height: 100%;
+}
+div.register-page {
+  height: 100% !important;
+  background: rgba(255, 255, 255, 0.4) url("../../assets/imgs/img.svg") repeat-x center;
+  background-size: 550px 560px;
+}
+
+.register-box {
   min-width: 100px;
   max-width: 500px;
   margin: 5% auto;
 }
-.info-color{
-  background-color: #aacdcc !important;
+
+.info-color {
+  background: linear-gradient(to bottom, rgb(23, 125, 227), rgb(113, 178, 254)) !important;
 }
