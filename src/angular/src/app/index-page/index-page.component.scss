@@ -11,7 +11,6 @@ th.name, th.lastprice:hover {
 
 td {
   vertical-align: middle;
-  position: relative;
 }
 
 td.name {
@@ -79,11 +78,7 @@ input.form-control {
 
 div.dropsearch {
   position: fixed;
-<<<<<<< HEAD
-  z-index: 10;
-=======
   z-index: 1;
->>>>>>> master
   width: 400px;
   max-height: 300px;
   overflow: auto;

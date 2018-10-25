@@ -1,4 +1,4 @@
-export interface StockQuote {
+export interface Quote {
   avgTotalVolume: number;
   calculationPrice: string;
   change: number;

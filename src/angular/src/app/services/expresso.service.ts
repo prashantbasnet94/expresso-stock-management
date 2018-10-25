@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {User} from '../types/user';
 import {Stock} from '../types/stock';
 import 'rxjs/Rx';
+import { StockDetail } from '../types/stock-details';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,12 @@ export class ExpressoService {
 
   signUp(user: User) {
     console.log((user));
-    return this.http.post('user/authenticate', user).map((error: Error) => {
-      console.log(error);
-    });
+    return this.http.post('/user/authenticate', user).map((res) => {
+      return (res);
+    }).toPromise()
+      .catch((error) => {
+        return error;
+      });
   }
 
   getStockByTicker(ticker: string) {
@@ -35,21 +39,37 @@ export class ExpressoService {
         });
   }
 
-  addStockToWatchList(id) {
-    console.log(id);
+  addStockToWatchList(id): Promise<any> {
     return this.http.get('/stock/createQuoteWatchlist/' + id).map((data) => {
+      return (data);
+    })
+      .toPromise()
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  getWatchlist() {
+    return this.http.get('/stock/getQuoteWatchlist').map((data: Stock[]) => {
       return data;
     });
   }
 
   getDataForGraph(ticker) {
-    return this.http.get('/1.0/stock/' + ticker + '/chart/1m').map((data: any[]) => {
+    return this.http.get('/1.0/stock/' + ticker + '/batch?types=quote,news,chart&range=1d&last=10').map((data: StockDetail[]) => {
+      console.log(data);
       return data;
     });
   }
 
   getLogo(ticker) {
     return this.http.get('1.0/stock/' + ticker + '/logo').map((data) => {
+      return data;
+    });
+  }
+
+  getCompanyInfo(ticker){
+    return this.http.get('/1.0/stock/' + ticker + '/company').map((data) => {
       return data;
     });
   }

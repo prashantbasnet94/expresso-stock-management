@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ExpressoService} from '../services/expresso.service';
 import {Router} from '@angular/router';
 import {Stock} from '../types/stock';
+import {SorterService} from '../services/sorter.service';
 
 @Component({
   selector: 'app-index-page',
@@ -17,20 +18,15 @@ export class IndexPageComponent implements OnInit {
   pageLoaded = false;
   noOfClicks = 0;
 
-  constructor(private expressoService: ExpressoService, private router: Router) {
+  constructor(private expressoService: ExpressoService, private router: Router, private sorter: SorterService) {
   }
 
   ngOnInit() {
     this.expressoService.getStocks()
       .subscribe((data: Stock[]) => {
-<<<<<<< HEAD
           this.stocks = data.filter((value) => {
             return value.name.length > 0;
           });
-=======
-          this.stocks = data;
-          console.log(this.stocks);
->>>>>>> master
           return this.pageLoaded = true;
         },
         (error) => {
@@ -58,80 +54,25 @@ export class IndexPageComponent implements OnInit {
     this.showDropDown = !this.showDropDown;
   }
 
-  sortByLastPrice($event: Event) {
+  sortByLastPrice() {
     if (this.noOfClicks % 2 === 0) {
       this.noOfClicks++;
-      console.log($event);
-      this.stocks = this.stocks.sort(function (a, b) {
-        if (a.price < b.price) {
-          return -1;
-        } else if (a.price > b.price) {
-          return 1;
-        }
-        return 0;
-      });
+      this.stocks = this.sorter.sortByLowestPrice(this.stocks);
     } else if (this.noOfClicks % 2 === 1) {
       this.noOfClicks++;
-      console.log($event);
-      this.stocks = this.stocks.sort(function (a, b) {
-        if (a.price > b.price) {
-          return -1;
-        } else if (a.price < b.price) {
-          return 1;
-        }
-
-        return 0;
-      });
+      this.stocks = this.sorter.sortByHighestPrice(this.stocks);
     }
-    console.log(this.noOfClicks);
   }
 
 
   sortByName() {
     if (this.noOfClicks % 2 === 0) {
       this.noOfClicks++;
-      this.stocks = this.stocks.sort(function (a, b) {
-        if (a.name < b.name) {
-          return -1;
-        } else if (a.name > b.name) {
-          return 1;
-        }
-        return 0;
-      });
+      this.stocks = this.sorter.sortNameByAscendingOrder(this.stocks);
     } else if (this.noOfClicks % 2 === 1) {
       this.noOfClicks++;
-      this.stocks = this.stocks.sort(function (a, b) {
-        if (a.name > b.name) {
-          return -1;
-        } else if (a.name < b.name) {
-          return 1;
-        }
-
-        return 0;
-      });
+      this.stocks = this.sorter.sortNameByDescendingOrder(this.stocks);
     }
-    console.log(this.noOfClicks);
-<<<<<<< HEAD
-=======
-  }
-
-  reload() {
-    const container = document.getElementById('name-value');
-    const content = container.innerHTML;
-    container.innerHTML = content;
-
-    //this line is to watch the result in console , you can remove it later
-    console.log('Refreshed');
->>>>>>> master
-  }
-
-  reload() {
-    const container = document.getElementById('name');
-    const content = container.innerHTML;
-    container.innerHTML = content;
-
-    //this line is to watch the result in console , you can remove it later
-    console.log('Refreshed');
   }
 
 }

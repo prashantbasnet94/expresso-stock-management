@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Stock} from '../types/stock';
-<<<<<<< HEAD
 import {ExpressoService} from '../services/expresso.service';
 import {Router} from '@angular/router';
-=======
-import {ExpressoService} from '../expresso.service';
->>>>>>> master
+import {forEach} from '@angular/router/src/utils/collection';
+import {SorterService} from '../services/sorter.service';
 
 @Component({
   selector: 'app-watchlist-page',
@@ -14,22 +12,26 @@ import {ExpressoService} from '../expresso.service';
 })
 export class WatchlistPageComponent implements OnInit {
 
-<<<<<<< HEAD
   stocks: Stock[] = [];
   watchlist: Stock[];
   searchResults: Stock[] = [];
   searchInput = '';
   showDropDown = false;
   tickerToAdd = 'Hello';
-  logoUrl = '';
+  noOfClicks = 0;
 
-  constructor(private expressoService: ExpressoService, private router: Router) {
+  constructor(private expressoService: ExpressoService, private router: Router, private sorter: SorterService) {
   }
 
   ngOnInit() {
     this.expressoService.getStocks().subscribe((data: Stock[]) => {
       this.stocks = data;
     });
+    this.expressoService.getWatchlist().subscribe((data: Stock[]) => {
+      this.watchlist = data;
+      console.log(data);
+    });
+
   }
 
   searchStock($event: Event) {
@@ -40,10 +42,7 @@ export class WatchlistPageComponent implements OnInit {
   }
 
   addStockToWatchlist() {
-    this.expressoService.addStockToWatchList(this.tickerToAdd).subscribe((data: Stock[]) => {
-      this.watchlist = data;
-      console.log(this.watchlist);
-    });
+    this.expressoService.addStockToWatchList(this.tickerToAdd);
   }
 
   toggleDropDown() {
@@ -55,49 +54,29 @@ export class WatchlistPageComponent implements OnInit {
     this.toggleDropDown();
   }
 
-  // getLogo(ticker) {
-  //   return this.expressoService.getCompanyLogo(ticker).subscribe((data: string) => {
-  //     this.logoUrl = data;
-  //   });
-  // }
-=======
-  stocks: Stock[];
-  searchResults: Stock[] = [];
-  searchInput = '';
-  showDropDown = false;
-
-  constructor(private expressoService: ExpressoService) {
+  stockDetails(ticker) {
+    return this.router.navigate(['/index/' + ticker]);
   }
 
-  ngOnInit() {
-    this.expressoService.getStocks()
-      .subscribe((data: Stock[]) => {
-          this.stocks = data;
-          console.log(this.stocks);
-        },
-        (error) => {
-          console.log(error);
-        });
+  sortByLastPrice() {
+    if (this.noOfClicks % 2 === 0) {
+      this.noOfClicks++;
+      this.stocks = this.sorter.sortByLowestPrice(this.stocks);
+    } else if (this.noOfClicks % 2 === 1) {
+      this.noOfClicks++;
+      this.stocks = this.sorter.sortByHighestPrice(this.stocks);
+    }
   }
 
-  searchStock($event: Event) {
-    this.searchInput = $event.srcElement['value'].toString().toLocaleLowerCase();
-    this.searchResults = this.stocks.filter((stock: Stock) => {
-      return stock.name.toLocaleLowerCase().includes(this.searchInput);
-    });
-    console.log(this.searchResults);
+
+  sortByName() {
+    if (this.noOfClicks % 2 === 0) {
+      this.noOfClicks++;
+      this.stocks = this.sorter.sortNameByAscendingOrder(this.stocks);
+    } else if (this.noOfClicks % 2 === 1) {
+      this.noOfClicks++;
+      this.stocks = this.sorter.sortNameByDescendingOrder(this.stocks);
+    }
   }
 
-  addStockToWatchlist() {
-    console.log();
-  }
-
-  toggleDropDown() {
-    this.showDropDown = !this.showDropDown;
-  }
-
-  setSearchParams(name) {
-    this.searchInput = name;
-  }
->>>>>>> master
 }

@@ -13,7 +13,6 @@
 
   </div>
 </form>
-
 <div class="tableDiv" *ngIf="pageLoaded">
   <table class="table table-striped">
     <thead>
@@ -33,10 +32,6 @@
     <tbody>
     <tr class="pointerCursor" *ngFor="let stock of stocks | paginate: {itemsPerPage:50, currentPage: p}"
         (click)="onSearchResultsClick(stock.ticker)">
-<<<<<<< HEAD
-=======
-      <!--<td scope="row" class="ranking">{{stock.ranking}}</td>-->
->>>>>>> master
       <td class="name">{{stock.name}}</td>
       <td class="ticker font-weight-bold">({{stock.ticker}})</td>
       <td class="lastprice">${{stock.price.toLocaleString(undefined, {maximumFractionDigits: 2})}}</td>

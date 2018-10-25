@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-<<<<<<< HEAD
 import {ExpressoService} from '../services/expresso.service';
-import {ActivatedRoute} from '@angular/router';
-import {StockQuote} from '../types/stockQuote';
-=======
-import {ExpressoService} from '../expresso.service';
-import {ActivatedRoute} from '@angular/router';
->>>>>>> master
+import {ActivatedRoute, Router} from '@angular/router';
+import { Quote } from '../types/quote';
+import { StockDetail } from '../types/stock-details';
+import { News } from '../types/news';
+import {CompanyInfo} from '../types/company-info';
 
 @Component({
   selector: 'app-detail-stock-info',
@@ -15,48 +13,49 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class DetailStockInfoComponent implements OnInit {
 
-<<<<<<< HEAD
-  stock: StockQuote[];
+  stock: Quote[];
   pageLoaded = false;
   ticker: string;
-  graphData: number[] = [];
+  graphDataLow: number[] = [];
+  graphDataHigh: number[] = [];
   graphLabel: string[] = [];
-  logo: string;
-=======
-  stock: any[];
-  stockLoaded = false;
+  news: News[];
+  company: CompanyInfo[];
+  tags: string[];
 
-  constructor(private service: ExpressoService, private routes: ActivatedRoute) {
-  }
->>>>>>> master
+  constructor(private service: ExpressoService, private routes: ActivatedRoute, private router: Router) {
 
-  constructor(private service: ExpressoService, private routes: ActivatedRoute) {
     this.ticker = this.routes.snapshot.params['ticker'];
-
-<<<<<<< HEAD
-    this.service.getStockByTicker(this.ticker).subscribe((data: StockQuote[]) => {
-      this.stock = data;
-      console.log(this.stock);
-=======
-    this.service.getStockByTicker(this.routes.snapshot.params['ticker']).subscribe((data: any[]) => {
-      this.stock = data;
-      this.stockLoaded = true;
->>>>>>> master
-    });
-    this.pageLoaded = true;
-    this.service.getDataForGraph(this.ticker).subscribe((data: any[]) => {
-      data.forEach((value) => {
-        this.graphData.push(value.open);
-        this.graphLabel.push(value.label);
-      });
-    });
-    this.service.getLogo(this.ticker).subscribe((data: string) => {
-      this.logo = data;
-    });
   }
 
   ngOnInit() {
+    this.service.getDataForGraph(this.ticker).subscribe((data: StockDetail[]) => {
+      this.stock = data['quote'];
+      this.news = data['news'];
+      console.log(data);
+      data['chart'].forEach((value) => {
+        if(value.marketAverage !== -1) {
+          this.graphDataLow.push(value.marketAverage);
+          // this.graphDataHigh.push(value.marketLow);
+          this.graphLabel.push(value.label);
+          this.pageLoaded = true;
+        }
 
+      });
+    });
+
+    this.service.getCompanyInfo(this.ticker).subscribe((data: CompanyInfo[]) => {
+      this.company = data;
+      this.tags = data['tags'];
+      console.log(data);
+    });
+  }
+
+  addToWatchlist() {
+    this.service.addStockToWatchList(this.ticker)
+      .then(() => {
+        this.router.navigate(['watchlist']);
+      });
   }
 
 }

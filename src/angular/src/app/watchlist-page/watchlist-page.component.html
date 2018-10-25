@@ -1,89 +1,71 @@
 <div class="row justify-content-end px-5">
-  <form class="form-inline waves-light" mdbWavesEffect>
-    <div class="searchbar" >
-<<<<<<< HEAD
-      <input class="form-control" type="text" placeholder="{{tickerToAdd}}" aria-label="Search"
-             (input)="searchStock($event)" (click)="toggleDropDown()">
-      <div class="dropsearch" *ngIf="showDropDown">
-        <div class="stocksAfterSearch" *ngFor="let stock of searchResults" (click)="(setTicker(stock.ticker))">
-=======
-      <input class="form-control" type="text" placeholder="Search stock" aria-label="Search"
-             (input)="searchStock($event)" (click)="toggleDropDown()" (cancel)="toggleDropDown()" [(ngModel)]="searchInput">
-      <div class="dropsearch" *ngIf="showDropDown">
-        <div class="stocksAfterSearch" *ngFor="let stock of searchResults" (click)="(setSearchParams(stock.name))">
->>>>>>> master
-          {{stock.name}}
-        </div>
-        <div class="stocksAfterSearch" *ngIf="searchResults.length==0 && searchInput.length!=0">
-          No Stock Found
+  <button type="button" mdbBtn class="relative waves-light btn-default float-right" (click)="basicModal.show()"
+          mdbWavesEffect>+ Add Stock
+  </button>
+</div>
+  <!--Watchlist Model-->
+  <div class="watchlistModel">
+    <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
+         aria-labelledby="myBasicModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title w-100" id="myModalLabel">Select the stock to add</h4>
+          </div>
+          <div class="modal-body">
+          <div>
+            <select>
+              <option *ngFor="let stock of stocks">{{stock.name}}</option>
+            </select>
+          </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn waves-light btn-danger" aria-label="Close" (click)="basicModal.hide()"
+                    mdbWavesEffect>Cancel
+            </button>
+            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                    (click)="addToWatchlist(stock.ticker)">Confirm
+            </button>
+          </div>
         </div>
       </div>
-<<<<<<< HEAD
-
     </div>
-  </form>
-=======
-    </div>
-
->>>>>>> master
-
-  <div class="justify-content-end">
-    <button type="button" class="btn btn-primary btn-md" (click)="addStockToWatchlist()">
-      Add Stock
-    </button>
   </div>
-<<<<<<< HEAD
-</div>
 
 
-=======
-  </form>
-</div>
-
-
-
->>>>>>> master
-<div class="tableDiv">
-  <table class="table">
-    <thead>
-    <tr class="table-header">
-      <th class="name" scope="col"><strong>Name</strong></th>
-      <th class="ticker" scope="col"><strong>Ticker</strong></th>
-      <th class="lastprice" scope="col"><strong>Price</strong></th>
-      <th class="perChange" scope="col"><strong>Percent Change</strong></th>
-      <th class="high" scope="col"><strong>24 hours high</strong></th>
-      <th class="low" scope="col"><strong> 24 hours low</strong></th>
-      <th class="graph" scope="col"><strong>Price Chart 1d</strong></th>
-      <th class="marketcap" scope="col"><strong>Market Cap</strong></th>
-      <th class="totalsupply" scope="col"><strong>Total Supply</strong></th>
-    </tr>
-    </thead>
-    <tbody>
-<<<<<<< HEAD
-    <tr class="pointerCursor" *ngFor="let stock of watchlist">
-      <td class="logo"></td>
-      <td class="name-value">{{stock.name}}</td>
-      <td class="ticker.value font-weight-bold">{{stock.ticker}}</td>
-      <td class="lastprice.value">{{stock.price}}</td>
-      <td class="perChange.value font-weight-bold" appPercentChange="{{stock.p_change}}">{{stock.p_change}}</td>
-      <td class="high.value">{{stock.max}}</td>
-      <td class="low.value">{{stock.min}}</td>
-      <td class="graph.value"></td>
-      <td class="marketcap.value">{{stock.total_market_cap}}</td>
-      <td class="totalsupply.value">{{stock.total_stock_supply}}</td>
-=======
-    <tr class="pointerCursor">
-      <td class="name-value"></td>
-      <td class="ticker.value font-weight-bold"></td>
-      <td class="lastprice.value"></td>
-      <td class="perChange.value font-weight-bold"></td>
-      <td class="high.value"></td>
-      <td class="low.value"></td>
-      <td class="graph.value"></td>
-      <td class="marketcap.value"></td>
-      <td class="totalsupply.value"></td>
->>>>>>> master
-    </tr>
-    </tbody>
-  </table>
-</div>
+  <div class="tableDiv">
+    <table class="table table">
+      <thead>
+      <tr class="table-header">
+        <th class="name" scope="col"><strong>Name</strong></th>
+        <th class="ticker" scope="col"><strong>Ticker</strong></th>
+        <th class="lastprice" scope="col"><strong>Price</strong></th>
+        <th class="perChange" scope="col"><strong>Percent Change</strong></th>
+        <th class="high" scope="col"><strong>24 hours high</strong></th>
+        <th class="low" scope="col"><strong> 24 hours low</strong></th>
+        <!--<th class="graph" scope="col"><strong>Price Chart 1d</strong></th>-->
+        <th class="marketcap" scope="col"><strong>Market Cap</strong></th>
+        <th class="totalsupply" scope="col"><strong>Total Supply</strong></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="pointerCursor" *ngFor="let stock of watchlist" (click)="stockDetails(stock.ticker)">
+        <td class="name-value">{{stock.name}}</td>
+        <td class="ticker.value font-weight-bold">{{stock.ticker}}</td>
+        <td class="lastprice.value">${{stock.price.toLocaleString()}}</td>
+        <td class="perChange.value font-weight-bold" appPercentChange="{{stock.p_change}}">
+          {{stock.p_change.toLocaleString()}}%
+        </td>
+        <td class="high.value">${{stock.max}}</td>
+        <td class="low.value">${{stock.min}}</td>
+        <!--<td class="graph.value"></td>-->
+        <td class="marketcap.value">${{stock.total_market_cap.toLocaleString()}}</td>
+        <td class="totalsupply.value">{{stock.total_stock_supply.toLocaleString()}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>

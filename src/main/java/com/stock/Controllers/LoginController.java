@@ -10,20 +10,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
 
+	
 	 
+	@GetMapping("/signed")
+	public String SignUp() {
 	
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String login(Model model, String error, String logout) {
-		if (error != null)
-			model.addAttribute("errorMsg", "Your username and password are invalid.");
-
-		if (logout != null)
-			model.addAttribute("msg", "You have been logged out successfully.");
-
-		return "login";
+	//	UserImplements tempRegis = new UserImplements( );
+	//	model.addAttribute("data",tempRegis);
+		return "signed";
+		
 	}
-	 
+
+ 
 	
 	
 }

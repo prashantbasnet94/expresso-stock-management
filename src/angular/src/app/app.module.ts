@@ -20,11 +20,9 @@ import {TimeDatePipe} from './Pipes/time-date.pipe';
 import {PricePipePipe} from './Pipes/price-pipe.pipe';
 import {PercentChangeDirective} from './directives/percent-change.directive';
 import {NgxPaginationModule} from 'ngx-pagination';
-<<<<<<< HEAD
 import {PercentIconPipe} from './Pipes/percent-icon.pipe';
-=======
-import { LoaderComponent } from './loader/loader.component';
->>>>>>> master
+import { DetailPageLogoDirective } from './directives/detail-page-logo.directive';
+import { FilterPipe } from './Pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -41,11 +39,9 @@ import { LoaderComponent } from './loader/loader.component';
     TimeDatePipe,
     PricePipePipe,
     PercentChangeDirective,
-<<<<<<< HEAD
-    PercentIconPipe
-=======
-    LoaderComponent
->>>>>>> master
+    PercentIconPipe,
+    DetailPageLogoDirective,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

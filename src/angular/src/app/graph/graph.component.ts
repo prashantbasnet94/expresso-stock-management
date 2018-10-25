@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import * as Chart from 'chart.js';
 
 @Component({
@@ -8,53 +8,39 @@ import * as Chart from 'chart.js';
 })
 
 
-export class GraphComponent implements OnInit {
-  @Input() dataset: number[];
+export class GraphComponent implements AfterViewInit {
+  @Input() datasetlow: number[];
+  @Input() datasethigh: number[];
   @Input() dataLabel: string[];
 
-<<<<<<< HEAD
   chart: any;
-=======
-  public chartType = 'line';
-
-  public chartDatasets: Array<any> = [
-    {data: [65, 59, 80, 81, 84, 80, 90], label: '$'},
-  ];
-
-  public chartLabels: Array<any> = ['J', 'F', 'M', 'A', 'M', 'J', 'J'];
-
-  public chartColors: Array<any> = [
-    {
-      backgroundColor: 'rgba(21, 100, 191, 0.4)',
-      borderColor: 'rgba(220,220,220,1)',
-      borderWidth: 2,
-      pointBackgroundColor: 'rgba(220,220,220,1)',
-      pointBorderColor: '#010065',
-      pointHoverBackgroundColor: '#00011b',
-      pointHoverBorderColor: 'rgba(220,220,220,1)'
-    },
-  ];
-
-  public chartOptions: any = {
-    responsive: true
-  };
->>>>>>> master
 
   constructor() {
   }
 
-  ngOnInit() {
-    console.log(this.dataset);
-    console.log(this.dataLabel);
+  ngAfterViewInit() {
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
         labels: this.dataLabel,
         datasets: [{
-          data: this.dataset,
+          data: this.datasetlow,
           borderColor: '#3cba9f',
-          fill: '#3cba9f',
-        }]
+          fill: true,
+          label: 'Market Average',
+          backgroundColor: 'rgba(24,73,62,0.5)',
+          pointRadius: 1,
+        },
+
+          // {
+          //   data: this.datasethigh,
+          //   borderColor: '#002aba',
+          //   fill: true,
+          //   label: 'Highest',
+          //   backgroundColor: 'rgba(0,16,73,0.5)',
+
+          // }
+        ]
       }
     });
   }

@@ -5,4 +5,5 @@ export interface User  {
   last_name: string;
   username: string;
   dob: string;
+  enabled: number;
 }

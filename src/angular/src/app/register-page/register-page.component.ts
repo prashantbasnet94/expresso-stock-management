@@ -17,8 +17,9 @@ export class RegisterPageComponent implements OnInit {
     last_name: '',
     username: '',
     dob: '',
+    enabled: 1
   };
-  confirmPassword: string = '';
+  confirmPassword = '';
 
 
   constructor(private expresso: ExpressoService, private route: Router) {
@@ -28,15 +29,20 @@ export class RegisterPageComponent implements OnInit {
   }
 
   register() {
-    this.route.navigate(['login']).then(() => {
-      this.expresso.signUp(this.user).subscribe(() => {
-      });
+    this.route.navigate(['']).then(() => {
+      this.expresso.signUp(this.user)
+        .then((res) => {
+          console.log(res);
+        })
+        .then(() => {
+          this.route.navigate(['login']);
+        });
     });
   }
 
 
   validPassword() {
-    return this.user.password.length > 0 && this.user.password !== this.confirmPassword;
+    return this.user.password.length > 8 && this.user.password !== this.confirmPassword;
   }
 
 }
