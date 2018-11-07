@@ -1,5 +1,6 @@
 package com.stock.service;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.stock.dao.StockPortfolio;
 import com.stock.dao.StockWatchlist;
 import com.stock.dao.User;
  
@@ -52,21 +54,39 @@ public class StockImplementation implements StockService {
 	public Quote getQuoteDetails(String ticker) {
 		return stockDao.getQuoteDetails(ticker);
 	}
+	
+	//watchlist
 
 	@Override
-	public  List<com.stock.dao.StockWatchlist> createQuoteWatchlist(String ticker) {
+	public  List<com.stock.dao.StockWatchlist> createQuoteWatchlist(String ticker,Principal pri) {
  
-		System.out.println("9999999999999999999999999999999999");
- 
-		return stockDao.createQuoteWatchlist(ticker);
+  
+		return stockDao.createQuoteWatchlist(ticker,pri);
 	}
 
+	
+	@Override
+	public  List<com.stock.dao.StockWatchlist> getQuoteWatchlist(Principal pri) {
+ 
+  
+		return stockDao.getQuoteWatchlist(pri);
+	}
+	
+//portfolio
+	@Override
+	public List<StockPortfolio> createQuotePortfolio(String ticker, Principal pri, int quantity, int date) {
+		// TODO Auto-generated method stub
+		return stockDao.createQuotePortfolio(ticker,pri,quantity,date);
+	}
 
 	@Override
-	public List<StockWatchlist> createQuoteWatchlist() {
-
-		return stockDao.createQuoteWatchlist();
+	public List<StockPortfolio> getQuotePortfolio(Principal pri) {
+		// TODO Auto-generated method stub
+		return stockDao.getQuotePortfolio(pri);
 	}
+	 
+	 
+	
 	
 	
 	

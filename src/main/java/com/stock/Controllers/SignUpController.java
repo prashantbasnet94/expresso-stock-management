@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.stock.dao.User;
@@ -47,8 +46,8 @@ public class SignUpController {
  
 	
 	@PostMapping("/authenticate")
-	public String processForm(@RequestBody User user,
-			 HttpServletRequest request,Model model, @Valid @ModelAttribute("data") User thuser,
+	public String processForm(
+			 HttpServletRequest request,Model model, @Valid @ModelAttribute("data") User user,
 			BindingResult theBindingResult) {
 		
 	 

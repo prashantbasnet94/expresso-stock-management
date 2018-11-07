@@ -1,5 +1,6 @@
 package com.stock.restGetDao;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -11,12 +12,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import com.stock.dao.StockIndex;
+import com.stock.dao.StockPortfolio;
 import com.stock.dao.StockWatchlist;
  
 import org.springframework.stereotype.Repository;
 
 import com.stock.dao.StockIndex;
- 
+import com.stock.thread.portfolio.PortfolioDao;
 import com.stock.thread.watchlist.WatchlistDao;
 
 import pl.zankowski.iextrading4j.api.stocks.Quote;
@@ -31,6 +33,9 @@ public class StockDAOImplements implements StockDao{
 
 	@Autowired
 private WatchlistDao watchlistDao;
+	
+	@Autowired
+private PortfolioDao portfolioDao;
 
 	@Override
 	public List<StockIndex> getQuotes() {
@@ -98,19 +103,35 @@ private WatchlistDao watchlistDao;
 		
 		
 	}
-
+//watchlist
 	@Override
-	public List<com.stock.dao.StockWatchlist> createQuoteWatchlist(String ticker) {
+	public List<com.stock.dao.StockWatchlist> createQuoteWatchlist(String ticker,Principal pri) {
 		
-		System.out.println("++++++++++++++++++++++++++++" +ticker);
-	return watchlistDao.createQuoteWatchlist(ticker);
+	
+	return watchlistDao.createQuoteWatchlist(ticker,pri);
  
 	}
 
 	@Override
-	public List<StockWatchlist> createQuoteWatchlist() {
+	public List<StockWatchlist> getQuoteWatchlist(Principal pri) {
 		// TODO Auto-generated method stub
-		return watchlistDao.createQuoteWatchlist( );
+		return watchlistDao.getQuoteWatchlist(pri);
  
+	}
+
+	
+//portfolio
+	@Override
+	public List<StockPortfolio> createQuotePortfolio(String ticker, Principal pri, int quantity,int date) {
+		// TODO Auto-generated method stub
+		return portfolioDao.createQuotePortfolio(ticker,pri,quantity,date);
+		
+	}
+
+	@Override
+	public List<StockPortfolio> getQuotePortfolio(Principal pri) {
+		// TODO Auto-generated method stub
+		return portfolioDao.getQuotePortfolio(pri);
+		 
 	}
 }

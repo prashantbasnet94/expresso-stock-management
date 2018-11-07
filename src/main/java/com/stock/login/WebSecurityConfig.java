@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            "/console/**",
 	            "/user/signUp",
 	            "/user/authenticate",
-	            "/stock/**"
+	           
 	    };
 	
     @Override
@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
             .formLogin()
-                .loginPage("/login").loginProcessingUrl("/alish").defaultSuccessUrl("/signed").failureUrl("/failed")
+                .loginPage("/login").defaultSuccessUrl("/goodluck").failureUrl("/failed")
                 .permitAll()
                 .and()
             .logout()

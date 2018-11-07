@@ -1,4 +1,4 @@
-package com.stock.thread.watchlist;
+package com.stock.thread.portfolio;
 
 import java.security.Principal;
 import java.util.List;
@@ -8,14 +8,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 
-import com.stock.dao.StockWatchlist;
+import com.stock.dao.StockPortfolio;
+ 
 
 import pl.zankowski.iextrading4j.api.stocks.Quote;
 import pl.zankowski.iextrading4j.client.IEXTradingClient;
 import pl.zankowski.iextrading4j.client.rest.request.stocks.QuoteRequestBuilder;
 
 @Repository
-public class WatchlistDaoImplements implements WatchlistDao{
+public class PortfolioDaoImplements implements PortfolioDao{
 	
 	
 public static   String  username;
@@ -25,7 +26,7 @@ public static   String  username;
 	
  
  
-	public List<StockWatchlist> extended(String ticker, Principal pri) {
+	public List<StockPortfolio> extended(String ticker, Principal pri, int quantity, int date) {
 		
 	 //savves data in the db
  
@@ -40,7 +41,7 @@ public static   String  username;
 		
 		SessionFactory factory = new Configuration()
 				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(com.stock.dao.StockWatchlist.class)
+				.addAnnotatedClass(com.stock.dao.StockPortfolio.class)
 				.buildSessionFactory();
 
 					Session session = factory.getCurrentSession();
@@ -53,7 +54,7 @@ public static   String  username;
 				    	System.out.println("0000000000000000000000000000000000000000000000000000000000000000"+pri.getName());
 
 				
-						com.stock.dao.StockWatchlist stock = new 	com.stock.dao.StockWatchlist(pri.getName(),quote.getCompanyName(), quote.getSymbol(), quote.getLow(), quote.getHigh(), quote.getChangePercent(),
+						com.stock.dao.StockPortfolio stock = new 	com.stock.dao.StockPortfolio(pri.getName(),quote.getCompanyName(), quote.getSymbol(), quote.getLow(), quote.getHigh(), quote.getChangePercent(),
 								quote.getLatestVolume(), quote.getMarketCap(), quote.getOpen()) ;
 				
 			    session.beginTransaction();
@@ -89,19 +90,19 @@ public static   String  username;
 		
 		 factory = new Configuration()
 				.configure("hibernate.cfg.xml")
-					.addAnnotatedClass(com.stock.dao.StockWatchlist.class)
+					.addAnnotatedClass(com.stock.dao.StockPortfolio.class)
 						.buildSessionFactory();
 		 session =factory.getCurrentSession();
 		session.beginTransaction();
 		System.out.println("-----------------------------------------------------");
-		List<com.stock.dao.StockWatchlist> watchlistQuote =session.createQuery("from com.stock.dao.StockWatchlist").getResultList();
+		List<StockPortfolio> portfolioQuote =session.createQuery("from com.stock.dao.StockPortfolio").getResultList();
 	
 		System.out.println("-----------------------------------------------------");
 		session.getTransaction().commit();
 		
 		
 		factory.close();
-		return watchlistQuote;
+		return portfolioQuote;
  
 	}
 
@@ -111,7 +112,7 @@ public static   String  username;
 
 
 
-	private List<StockWatchlist> extended(Principal pri) {
+	private List<StockPortfolio> extended(Principal pri) {
 		// TODO Auto-generated method stub
 		
 		
@@ -119,15 +120,15 @@ public static   String  username;
 		
 		SessionFactory factory = new Configuration()
 				.configure("hibernate.cfg.xml")
-				.addAnnotatedClass(com.stock.dao.StockWatchlist.class)
+				.addAnnotatedClass(com.stock.dao.StockPortfolio.class)
 				.buildSessionFactory();
 
 					Session session = factory.getCurrentSession();
 		 session =factory.getCurrentSession();
 		session.beginTransaction();
 		System.out.println("--------------------extended(Principal pri)---------------------------------"+ pri.getName()+"a--------");
-		List<com.stock.dao.StockWatchlist> watchlistQuote =session.createQuery("from com.stock.dao.StockWatchlist s where s.userName = '"+pri.getName()+"'").getResultList();
-		System.out.println(watchlistQuote);
+		List<com.stock.dao.StockPortfolio> portfolioQuote =session.createQuery("from com.stock.dao.StockPortfolio s where s.userName = '"+pri.getName()+"'").getResultList();
+		System.out.println(portfolioQuote);
 		System.out.println("*******************************************************");
 		
 		System.out.println("-----------------------------------------------------");
@@ -135,38 +136,35 @@ public static   String  username;
 		
 		
 		factory.close();
-		return watchlistQuote;
+		return portfolioQuote;
 		
 	}
  
 
 
-
-	@Override
-	public List<StockWatchlist> createQuoteWatchlist(String ticker,Principal pri) {
-		
-		// TODO Auto-generated method stub
-		
-			 
-				//SaveToDatabase saveToDatabase = new SaveToDatabase(ticker);
-			//	thread1 = new Thread(saveToDatabase);
-			//	thread1.start();
-				
-				
-				
-				return extended(ticker,pri);
-				
-	}
+ 
 
 
 
 	@Override
-	public List<StockWatchlist> getQuoteWatchlist(Principal pri) {
+	public List<StockPortfolio> createQuotePortfolio(String ticker, Principal pri, int quantity, int date) {
 		// TODO Auto-generated method stub
-		return extended(pri);
+		return extended(ticker,pri,quantity,date);
 	}
  
 	 
+ 
+
+
+
+	@Override
+	public List<StockPortfolio> getQuotePortfolio(Principal pri) {
+		// TODO Auto-generated method stub
+		return extended(pri);
+	}
+
+
+
 
 }
  
