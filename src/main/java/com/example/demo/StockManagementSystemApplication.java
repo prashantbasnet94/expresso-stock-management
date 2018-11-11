@@ -24,9 +24,9 @@ public class StockManagementSystemApplication {
 	static MainDatabasePopulate populate = new MainDatabasePopulate();
 
 	public static void main(String[] args) {
-	/*	Thread thread = new Thread(update);
-		thread.start();
-		*/
+//	Thread thread = new Thread(populate);
+//		thread.start();
+		
 		SpringApplication.run(StockManagementSystemApplication.class, args);
 	}
 	 

@@ -49,6 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            "/console/**",
 	            "/user/signUp",
 	            "/user/authenticate",
+	            "/stock/**",
 	           
 	    };
 	

@@ -9,8 +9,10 @@ div.register-page {
 
 .register-box {
   min-width: 100px;
-  max-width: 500px;
-  margin: 5% auto;
+  max-height: 600px;
+  max-width: 400px;
+  margin: 50px auto;
+  overflow: scroll;
 }
 
 .info-color {

@@ -19,20 +19,13 @@ export class IndexPageComponent implements OnInit {
   noOfClicks = 0;
 
   constructor(private expressoService: ExpressoService, private router: Router, private sorter: SorterService) {
+    this.expressoService.getStocks()
+      .then(() => {
+        this.pageLoaded = true;
+      });
   }
 
   ngOnInit() {
-    this.expressoService.getStocks()
-      .subscribe((data: Stock[]) => {
-          this.stocks = data.filter((value) => {
-            return value.name.length > 0;
-          });
-          return this.pageLoaded = true;
-        },
-        (error) => {
-          console.log(error);
-        });
-
   }
 
   onSearchResultsClick(ticker: string) {
@@ -54,24 +47,24 @@ export class IndexPageComponent implements OnInit {
     this.showDropDown = !this.showDropDown;
   }
 
-  sortByLastPrice() {
+  sortNumber(value) {
     if (this.noOfClicks % 2 === 0) {
       this.noOfClicks++;
-      this.stocks = this.sorter.sortByLowestPrice(this.stocks);
+      this.stocks = this.sorter.sortNumberAscending(this.stocks, value);
     } else if (this.noOfClicks % 2 === 1) {
       this.noOfClicks++;
-      this.stocks = this.sorter.sortByHighestPrice(this.stocks);
+      this.stocks = this.sorter.sortNumberDescending(this.stocks, value);
     }
   }
 
 
-  sortByName() {
+  sortString(value) {
     if (this.noOfClicks % 2 === 0) {
       this.noOfClicks++;
-      this.stocks = this.sorter.sortNameByAscendingOrder(this.stocks);
+      this.stocks = this.sorter.sortStringByAscendingOrder(this.stocks, value);
     } else if (this.noOfClicks % 2 === 1) {
       this.noOfClicks++;
-      this.stocks = this.sorter.sortNameByDescendingOrder(this.stocks);
+      this.stocks = this.sorter.sortStringByDescendingOrder(this.stocks, value);
     }
   }
 

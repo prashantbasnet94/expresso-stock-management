@@ -12,4 +12,5 @@ export interface Chart {
     unadjustedVolume: number;
     volume: number;
     vwap: number;
+    marketAverage?: number;
 }

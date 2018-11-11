@@ -14,23 +14,22 @@
   </div>
 </form>
 <div class="tableDiv" *ngIf="pageLoaded">
-  <table class="table table-striped">
+  <table class="table">
     <thead>
     <tr class="table-header">
       <!--<th class="ranking" scope="col">#</th>-->
-      <th class="name" scope="col" (click)="sortByName()">Name <i class="fa fa-sort"></i></th>
-      <th class="ticker" scope="col">Ticker</th>
-      <th class="lastprice" scope="col" (click)="sortByLastPrice($event)">Last Price <i class="fa fa-sort"></i></th>
-      <th class="perChange" scope="col">%</th>
-      <th class="high" scope="col">24 high</th>
-      <th class="low" scope="col">24 low</th>
-      <th class="graph" scope="col">Price Chart 1d</th>
-      <th class="marketcap" scope="col">Market Cap</th>
-      <th class="totalsupply" scope="col">Total Supply</th>
+      <th class="name" scope="col" (click)="sortString('name')">Name <i class="fa fa-sort"></i></th>
+      <th class="ticker" scope="col" (click)="sortString('ticker')">Ticker <i class="fa fa-sort"></i></th>
+      <th class="lastprice" scope="col" (click)="sortNumber('price')">Last Price <i class="fa fa-sort"></i></th>
+      <th class="perChange" scope="col" (click)="sortNumber('p_change')">% <i class="fa fa-sort"></i></th>
+      <th class="high" scope="col" (click)="sortNumber('max')">24 high <i class="fa fa-sort"></i></th>
+      <th class="low" scope="col" (click)="sortNumber('min')">24 low <i class="fa fa-sort"></i></th>
+      <th class="marketcap" scope="col" (click)="sortNumber('total_market_cap')">Market Cap <i class="fa fa-sort"></i></th>
+      <th class="totalsupply" scope="col" (click)="sortNumber('total_stock_supply')">Total Supply <i class="fa fa-sort"></i></th>
     </tr>
     </thead>
     <tbody>
-    <tr class="pointerCursor" *ngFor="let stock of stocks | paginate: {itemsPerPage:50, currentPage: p}"
+    <tr class="pointerCursor" *ngFor="let stock of expressoService.stockList | paginate: {itemsPerPage:25, currentPage: p}"
         (click)="onSearchResultsClick(stock.ticker)">
       <td class="name">{{stock.name}}</td>
       <td class="ticker font-weight-bold">({{stock.ticker}})</td>
@@ -40,7 +39,6 @@
       </td>
       <td class="high">${{stock.max.toLocaleString(undefined, {maximumFractionDigits: 2})}}</td>
       <td class="low">${{stock.min.toLocaleString(undefined, {maximumFractionDigits: 2})}}</td>
-      <td class="graph">TBD</td>
       <td class="marketcap">${{stock.total_market_cap.toLocaleString(undefined, {maximumFractionDigits: 2})}}</td>
       <td class="totalsupply">{{stock.total_stock_supply.toLocaleString()}}</td>
     </tr>
@@ -49,5 +47,5 @@
 </div>
 
 <div class="pagination justify-content-center" *ngIf="pageLoaded">
-  <pagination-controls (pageChange)="p =$event" maxSize="10"></pagination-controls>
+  <pagination-controls (pageChange)="p =$event" maxSize="12"></pagination-controls>
 </div>

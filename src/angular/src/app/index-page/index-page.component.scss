@@ -5,8 +5,9 @@ th {
   }
 }
 
-th.name, th.lastprice:hover {
+tr th:hover {
   cursor: pointer;
+  background: linear-gradient( rgb(248, 248, 248), rgb(209, 209, 209));
 }
 
 td {
@@ -48,7 +49,8 @@ tr {
   min-height: 100%;
 }
 
-tr.table-header {
+tr.table-header{
+  background: linear-gradient( rgb(254, 254, 254), rgb(219, 219, 219));
 }
 
 div.pagination {
@@ -94,3 +96,11 @@ div.stocksAfterSearch:hover {
   color: rgb(22, 143, 247);
 }
 
+tr td {
+  color: #3498db;
+}
+
+tr td:nth-child(2) {
+  color: black;
+  font-weight: bolder;
+}

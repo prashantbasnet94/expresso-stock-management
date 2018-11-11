@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterContentChecked, AfterContentInit, AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import * as Chart from 'chart.js';
 
 @Component({
@@ -30,17 +30,7 @@ export class GraphComponent implements AfterViewInit {
           label: 'Market Average',
           backgroundColor: 'rgba(24,73,62,0.5)',
           pointRadius: 1,
-        },
-
-          // {
-          //   data: this.datasethigh,
-          //   borderColor: '#002aba',
-          //   fill: true,
-          //   label: 'Highest',
-          //   backgroundColor: 'rgba(0,16,73,0.5)',
-
-          // }
-        ]
+        }]
       }
     });
   }

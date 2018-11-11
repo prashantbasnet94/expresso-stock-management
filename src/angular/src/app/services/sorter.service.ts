@@ -9,11 +9,11 @@ export class SorterService {
   constructor() {
   }
 
-  sortByLowestPrice(stocks: Stock[]) {
+  sortNumberAscending(stocks: Stock[], value) {
     stocks = stocks.sort(function (a, b) {
-      if (a.price < b.price) {
+      if (a[value] < b[value]) {
         return -1;
-      } else if (a.price > b.price) {
+      } else if (a[value] > b[value]) {
         return 1;
       }
       return 0;
@@ -21,11 +21,11 @@ export class SorterService {
     return stocks;
   }
 
-  sortByHighestPrice(stocks: Stock[]) {
+  sortNumberDescending(stocks: Stock[], value) {
     stocks = stocks.sort(function (a, b) {
-      if (a.price > b.price) {
+      if (a[value] > b[value]) {
         return -1;
-      } else if (a.price < b.price) {
+      } else if (a[value] < b[value]) {
         return 1;
       }
 
@@ -34,11 +34,11 @@ export class SorterService {
     return stocks;
   }
 
-  sortNameByAscendingOrder(stocks: Stock[]) {
+  sortStringByAscendingOrder(stocks: Stock[], value) {
     stocks = stocks.sort(function (a, b) {
-      if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
+      if (a[value].toLocaleLowerCase() > b[value].toLocaleLowerCase()) {
         return -1;
-      } else if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
+      } else if (a[value].toLocaleLowerCase() < b[value].toLocaleLowerCase()) {
         return 1;
       }
       return 0;
@@ -47,11 +47,11 @@ export class SorterService {
 
   }
 
-  sortNameByDescendingOrder(stocks: Stock[]) {
+  sortStringByDescendingOrder(stocks: Stock[], value) {
     stocks = stocks.sort(function (a, b) {
-      if (a.name.toLocaleLowerCase() < b.name.toLocaleLowerCase()) {
+      if (a[value].toLocaleLowerCase() < b[value].toLocaleLowerCase()) {
         return -1;
-      } else if (a.name.toLocaleLowerCase() > b.name.toLocaleLowerCase()) {
+      } else if (a[value].toLocaleLowerCase() > b[value].toLocaleLowerCase()) {
         return 1;
       }
       return 0;

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ExpressoService} from '../services/expresso.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import { Quote } from '../types/quote';
-import { StockDetail } from '../types/stock-details';
-import { News } from '../types/news';
+import {Quote} from '../types/quote';
+import {StockDetail} from '../types/stock-details';
+import {News} from '../types/news';
 import {CompanyInfo} from '../types/company-info';
 
 @Component({
@@ -17,39 +17,38 @@ export class DetailStockInfoComponent implements OnInit {
   pageLoaded = false;
   ticker: string;
   graphDataLow: number[] = [];
-  graphDataHigh: number[] = [];
   graphLabel: string[] = [];
   news: News[];
-  company: CompanyInfo[];
+  company: CompanyInfo;
   tags: string[];
+  selectedGraphDate = '1d';
 
   constructor(private service: ExpressoService, private routes: ActivatedRoute, private router: Router) {
 
     this.ticker = this.routes.snapshot.params['ticker'];
+    this.service.getDataForGraph(this.ticker)
+      .then(() => {
+        this.company = this.service.company;
+        this.stock = this.service.stock.quote;
+        this.news = this.service.stock.news;
+        this.service.stock.chart.forEach((value) => {
+          if (value.marketAverage !== -1) {
+            this.graphDataLow.push(value.open);
+            this.graphLabel.push(value.label);
+          }
+        });
+      })
+      .then(() => {
+        this.pageLoaded = true;
+        console.log(this.company);
+        console.log(this.stock);
+        console.log(this.news);
+      });
   }
 
   ngOnInit() {
-    this.service.getDataForGraph(this.ticker).subscribe((data: StockDetail[]) => {
-      this.stock = data['quote'];
-      this.news = data['news'];
-      console.log(data);
-      data['chart'].forEach((value) => {
-        if(value.marketAverage !== -1) {
-          this.graphDataLow.push(value.marketAverage);
-          // this.graphDataHigh.push(value.marketLow);
-          this.graphLabel.push(value.label);
-          this.pageLoaded = true;
-        }
-
-      });
-    });
-
-    this.service.getCompanyInfo(this.ticker).subscribe((data: CompanyInfo[]) => {
-      this.company = data;
-      this.tags = data['tags'];
-      console.log(data);
-    });
   }
+
 
   addToWatchlist() {
     this.service.addStockToWatchList(this.ticker)

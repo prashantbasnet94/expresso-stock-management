@@ -1,8 +1,9 @@
-<div class="row justify-content-end px-5">
-  <button type="button" mdbBtn class="relative waves-light btn-default float-right" (click)="basicModal.show()"
-          mdbWavesEffect>+ Add Stock
-  </button>
-</div>
+<div class="watchlist">
+  <div class="row justify-content-end px-5">
+    <button type="button" mdbBtn class="relative waves-light btn-default float-right" (click)="basicModal.show()"
+            mdbWavesEffect>+ Add Stock
+    </button>
+  </div>
   <!--Watchlist Model-->
   <div class="watchlistModel">
     <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog"
@@ -16,11 +17,14 @@
             <h4 class="modal-title w-100" id="myModalLabel">Select the stock to add</h4>
           </div>
           <div class="modal-body">
-          <div>
-            <select>
-              <option *ngFor="let stock of stocks">{{stock.name}}</option>
-            </select>
-          </div>
+            <div>
+              <select [(ngModel)]="tickerToAdd" placeholder="No Stock Selected">
+                <option [value]="stock.ticker" *ngFor="let stock of stocks">{{stock.name}}</option>
+              </select>
+            </div>
+            <div *ngIf="">
+              Selected stock is already in watchlist
+            </div>
           </div>
 
           <div class="modal-footer">
@@ -28,7 +32,7 @@
                     mdbWavesEffect>Cancel
             </button>
             <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
-                    (click)="addToWatchlist(stock.ticker)">Confirm
+                    (click)="addStockToWatchlist()">Confirm
             </button>
           </div>
         </div>
@@ -41,15 +45,15 @@
     <table class="table table">
       <thead>
       <tr class="table-header">
-        <th class="name" scope="col"><strong>Name</strong></th>
-        <th class="ticker" scope="col"><strong>Ticker</strong></th>
-        <th class="lastprice" scope="col"><strong>Price</strong></th>
-        <th class="perChange" scope="col"><strong>Percent Change</strong></th>
-        <th class="high" scope="col"><strong>24 hours high</strong></th>
-        <th class="low" scope="col"><strong> 24 hours low</strong></th>
+        <th class="name" scope="col" (click)="sortString('name')"><strong>Name <i class="fa fa-sort"></i></strong></th>
+        <th class="ticker" scope="col" (click)="sortString('ticker')"><strong>Ticker <i class="fa fa-sort"></i></strong></th>
+        <th class="lastprice" scope="col" (click)="sortNumber('price')"><strong>Price <i class="fa fa-sort"></i></strong></th>
+        <th class="perChange" scope="col" (click)="sortNumber('p_change')"><strong>Percent Change <i class="fa fa-sort"></i></strong></th>
+        <th class="high" scope="col" (click)="sortNumber('max')"><strong>24 hours high <i class="fa fa-sort"></i></strong></th>
+        <th class="low" scope="col" (click)="sortNumber('min')"><strong> 24 hours low <i class="fa fa-sort"></i></strong></th>
         <!--<th class="graph" scope="col"><strong>Price Chart 1d</strong></th>-->
-        <th class="marketcap" scope="col"><strong>Market Cap</strong></th>
-        <th class="totalsupply" scope="col"><strong>Total Supply</strong></th>
+        <th class="marketcap" scope="col" (click)="sortNumber('total_market_cap')"><strong>Market Cap <i class="fa fa-sort"></i></strong></th>
+        <th class="totalsupply" scope="col" (click)="sortNumber('total_stock_supply')"><strong>Total Supply <i class="fa fa-sort"></i></strong></th>
       </tr>
       </thead>
       <tbody>
@@ -69,3 +73,4 @@
       </tbody>
     </table>
   </div>
+</div>

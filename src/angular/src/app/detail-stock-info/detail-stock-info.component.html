@@ -8,23 +8,32 @@
   <h1>{{stock.companyName}}</h1>
   <div class="row">
     <div class="col justify-content-center">
-      <app-graph [datasetlow]="graphDataLow"  [dataLabel]="graphLabel"></app-graph>
+      <div class="btn-group">
+        <label mdbBtn color="primary" [(ngModel)]="selectedGraphDate" mdbRadio="1d" size="sm" mdbWavesEffect>1d </label>
+        <label mdbBtn color="primary" [(ngModel)]="selectedGraphDate" mdbRadio="1m" size="sm" mdbWavesEffect>1m </label>
+        <label mdbBtn color="primary" [(ngModel)]="selectedGraphDate" mdbRadio="3m" size="sm" mdbWavesEffect>3m</label>
+        <label mdbBtn color="primary" [(ngModel)]="selectedGraphDate" mdbRadio="6m" size="sm" mdbWavesEffect>6m</label>
+        <label mdbBtn color="primary" [(ngModel)]="selectedGraphDate" mdbRadio="1y" size="sm" mdbWavesEffect>1y</label>
+        <label mdbBtn color="primary" [(ngModel)]="selectedGraphDate" mdbRadio="5y" size="sm" mdbWavesEffect>5y</label>
+      </div>
+      <app-graph [datasetlow]="graphDataLow" [dataLabel]="graphLabel"></app-graph>
 
+      <div class="news card-header border-light" style="font-size: 22px;position: sticky">Related News</div>
       <div class="news card border-light">
-          <h2 class="card-title" style="font-size: 22px;">Related News</h2>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item p-0" *ngFor="let article of news">
-                  <div class="card-body">
-                  <h5 class="card-title" style="font-size:20px">{{article.headline}}</h5>
-                  <p class="card-text">{{article.summary}}</p>
-                  <a class="card-link" style="font-size: 14px" [href]="article.url" target="_blank">Read more...<strong></strong></a>
-                  <div class="chip">
-                      <p class="card-text"><i>@Source: {{article.source}}</i></p>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item p-0" *ngFor="let article of news">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size:20px">{{article.headline}}</h5>
+              <p class="card-text">{{article.summary}}</p>
+              <a class="card-link" style="font-size: 14px" [href]="article.url" target="_blank">Read
+                more...<strong></strong></a>
+              <div class="chip">
+                <p class="card-text"><i>@Source: {{article.source}}</i></p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div class="col">

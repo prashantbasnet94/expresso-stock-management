@@ -3,16 +3,22 @@ import {HttpClient} from '@angular/common/http';
 import {User} from '../types/user';
 import {Stock} from '../types/stock';
 import 'rxjs/Rx';
-import { StockDetail } from '../types/stock-details';
+import {StockDetail} from '../types/stock-details';
+import 'rxjs/add/operator/toPromise';
+import {CompanyInfo} from '../types/company-info';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpressoService {
 
-  stock: Stock;
+  stock: StockDetail;
+  company: CompanyInfo;
+  stockList: Stock[];
+  watchList: Stock[];
 
   constructor(private http: HttpClient) {
+
   }
 
   signUp(user: User) {
@@ -25,53 +31,67 @@ export class ExpressoService {
       });
   }
 
-  getStockByTicker(ticker: string) {
-    return this.http.get('/1.0/stock/' + ticker + '/quote').map((data) => {
-      return data;
-    });
-  }
-
   getStocks() {
-    return this.http.get('stock/getQuotes')
-      .map(
-        (data) => {
-          return data;
-        });
+    const promise = new Promise((resolve, reject) => {
+      this.http.get('stock/getQuotes')
+        .toPromise()
+        .then((res: Stock[]) => {
+          this.stockList = res;
+        })
+        .then(() => resolve());
+    });
+    return promise;
   }
 
   addStockToWatchList(id): Promise<any> {
-    return this.http.get('/stock/createQuoteWatchlist/' + id).map((data) => {
-      return (data);
-    })
-      .toPromise()
-      .catch((error) => {
-        console.log(error);
-      });
+
+    const promise = new Promise((resolve, reject) => {
+      this.http.get('/stock/createQuoteWatchlist/' + id)
+        .toPromise()
+        .then((res: Stock[]) => {
+          this.watchList = res;
+        })
+        .then(() => resolve());
+    });
+    return promise;
   }
 
   getWatchlist() {
-    return this.http.get('/stock/getQuoteWatchlist').map((data: Stock[]) => {
-      return data;
+    const promise = new Promise((resolve, reject) => {
+      this.http.get('/stock/getQuoteWatchlist')
+        .toPromise()
+        .then((res: Stock[]) => {
+          this.watchList = res;
+        })
+        .then(() => resolve());
     });
+    return promise;
   }
 
   getDataForGraph(ticker) {
-    return this.http.get('/1.0/stock/' + ticker + '/batch?types=quote,news,chart&range=1d&last=10').map((data: StockDetail[]) => {
-      console.log(data);
-      return data;
+    const promise = new Promise((resolve, reject) => {
+      this.http.get('/1.0/stock/' + ticker + '/batch?types=quote,news,chart&range=1m&last=10')
+        .toPromise()
+        .then((res: StockDetail) => {
+          this.stock = res;
+        })
+        .then(() => this.getCompanyInfo(ticker))
+        .then(() => resolve());
+
     });
+    return promise;
   }
 
-  getLogo(ticker) {
-    return this.http.get('1.0/stock/' + ticker + '/logo').map((data) => {
-      return data;
+  getCompanyInfo(ticker) {
+    const promise = new Promise((resolve, reject) => {
+      this.http.get('/1.0/stock/' + ticker + '/company')
+        .toPromise()
+        .then((res: CompanyInfo) => {
+          this.company = res;
+          resolve();
+        });
     });
-  }
-
-  getCompanyInfo(ticker){
-    return this.http.get('/1.0/stock/' + ticker + '/company').map((data) => {
-      return data;
-    });
+    return promise;
   }
 
 
