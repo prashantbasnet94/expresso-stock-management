@@ -3,6 +3,8 @@ package com.stock.thread.watchlist;
 import java.security.Principal;
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -50,8 +52,8 @@ public static   String  username;
 					try {
 						 
 				     
-				    	System.out.println("0000000000000000000000000000000000000000000000000000000000000000"+pri.getName());
-
+/*				    	System.out.println("0000000000000000000000000000000000000000000000000000000000000000"+pri.getName());
+*/
 				
 						com.stock.dao.StockWatchlist stock = new 	com.stock.dao.StockWatchlist(pri.getName(),quote.getCompanyName(), quote.getSymbol(), quote.getLow(), quote.getHigh(), quote.getChangePercent(),
 								quote.getLatestVolume(), quote.getMarketCap(), quote.getOpen()) ;
@@ -70,21 +72,6 @@ public static   String  username;
 						factory.close();
 					}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		//getting fetching data from database
 		
 		 factory = new Configuration()
@@ -94,7 +81,7 @@ public static   String  username;
 		 session =factory.getCurrentSession();
 		session.beginTransaction();
 		System.out.println("-----------------------------------------------------");
-		List<com.stock.dao.StockWatchlist> watchlistQuote =session.createQuery("from com.stock.dao.StockWatchlist").getResultList();
+		List<com.stock.dao.StockWatchlist> watchlistQuote =session.createQuery("from com.stock.dao.StockWatchlist s where s.userName = '"+pri.getName()+"'").getResultList();
 	
 		System.out.println("-----------------------------------------------------");
 		session.getTransaction().commit();
@@ -164,6 +151,31 @@ public static   String  username;
 	public List<StockWatchlist> getQuoteWatchlist(Principal pri) {
 		// TODO Auto-generated method stub
 		return extended(pri);
+	}
+
+
+
+	@Override
+	public List<StockWatchlist> deleteQuoteWatchlist(String ticker, Principal pri) {
+		SessionFactory factory = new Configuration()
+				.configure("hibernate.cfg.xml")
+				.addAnnotatedClass(com.stock.dao.StockWatchlist.class)
+				.buildSessionFactory();
+
+					Session session = factory.getCurrentSession();
+		 session =factory.getCurrentSession();
+		session.beginTransaction();
+		
+		System.out.println("6666666666"+ticker+ "666666666666666666666"+pri);
+ 		session.createQuery("delete from com.stock.dao.StockWatchlist s where s.userName = '"+pri.getName()+"' and s.ticker='"+ticker+"'").executeUpdate();
+		   System.out.println("DDDDDDDDDDDDDOOOOOOOOOOOOOOOOOOONNNNNNNNNNNEEEEEEEEEEE");
+		   
+ 		List<com.stock.dao.StockWatchlist> watchlistQuote =session.createQuery("from com.stock.dao.StockWatchlist s where s.userName = '"+pri.getName()+"'").getResultList();
+		session.getTransaction().commit();
+		
+		
+		factory.close();
+		return watchlistQuote;
 	}
  
 	 

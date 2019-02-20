@@ -22,8 +22,11 @@ export class DetailStockInfoComponent implements OnInit {
   company: CompanyInfo;
   tags: string[];
   selectedGraphDate = '1d';
+  userLoggedIn: boolean;
 
   constructor(private service: ExpressoService, private routes: ActivatedRoute, private router: Router) {
+
+    this.userLoggedIn = this.service.userLoggedIn;
 
     this.ticker = this.routes.snapshot.params['ticker'];
     this.service.getDataForGraph(this.ticker)
@@ -40,9 +43,6 @@ export class DetailStockInfoComponent implements OnInit {
       })
       .then(() => {
         this.pageLoaded = true;
-        console.log(this.company);
-        console.log(this.stock);
-        console.log(this.news);
       });
   }
 
@@ -55,6 +55,17 @@ export class DetailStockInfoComponent implements OnInit {
       .then(() => {
         this.router.navigate(['watchlist']);
       });
+  }
+
+  addToPortfolio(f) {
+    const ticker = this.ticker;
+    const date = f.value.date;
+    const quantity = f.value.quantity;
+    const pricePaid = f.value.pricePaid;
+    this.service.addToPortfolio(ticker, quantity, date, pricePaid)
+      .then(() => {
+        this.router.navigate(['portfolio']);
+   });
   }
 
 }

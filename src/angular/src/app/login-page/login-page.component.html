@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <div class="login-page">
 
   <mdb-card class="login-box">
@@ -9,51 +11,32 @@
     </mdb-card-header>
 
 
+
     <!--Card content-->
     <mdb-card-body class="px-lg-5 pt-0">
 
       <!-- Form -->
-      <form class="text-center" style="color: #757575;">
+      <form class="text-center" style="color: #757575;" (ngSubmit)="submit(f)" #f="ngForm" >
 
         <!-- Email -->
         <div class="md-form">
-          <input type="email" name="email" [(ngModel)]="email" class="form-control" mdbInputDirective [mdbValidate]="false">
-          <label>E-mail</label>
+          <input id="username" type="text" name="username" ngModel class="form-control" mdbInputDirective [mdbValidate]="false" required>
+          <label for="username">Username</label>
         </div>
 
         <!-- Password -->
         <div class="md-form">
-          <input type="password" name="password" [(ngModel)]="password"  class="form-control" mdbInputDirective [mdbValidate]="false">
-          <label >Password</label>
-        </div>
-
-        <div class="d-flex justify-content-around">
-          <div>
-            <!-- Remember me -->
-            <mdb-checkbox>Remember me</mdb-checkbox>
-          </div>
-          <div>
-            <!-- Forgot password -->
-            <a href="">Forgot password?</a>
-          </div>
+          <input id="password" type="password" name="password" ngModel  class="form-control" mdbInputDirective [mdbValidate]="false" required>
+          <label for="password" >Password</label>
         </div>
 
         <button mdbBtn color="info" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0"
-                (click)="submit()">Sign in</button>
+                type="submit" [disabled]="!f.valid">Sign in</button>
 
         <!-- Register -->
         <p>Not a member?
           <a href="register">Register</a>
         </p>
-
-         <!--Social login-->
-        <p>or sign in with:</p>
-        <a type="button" class="btn-floating btn-fb btn-sm">
-          <mdb-icon icon="facebook"></mdb-icon>
-        </a>
-        <a type="button" class="btn-floating btn-tw btn-sm">
-          <mdb-icon icon="google"></mdb-icon>
-        </a>
       </form>
       <!-- Form -->
 
@@ -61,4 +44,23 @@
 
   </mdb-card>
 
+</div>
+
+<div mdbModal #successModal="mdbModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="mySuccessModal"
+     aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="successModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label class="align-text-center">{{loginMessage}}</label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close" (click)="successModal.hide()" mdbWavesEffect>Close</button>
+      </div>
+    </div>
+  </div>
 </div>

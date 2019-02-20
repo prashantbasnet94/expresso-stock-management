@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import com.stock.dao.User;
 import com.stock.restGetDao.StockDAOImplements;
 import com.stock.restGetDao.StockDao;
+import com.stock.thread.portfolio.PortfolioDao;
+import com.stock.thread.portfolio.PortfolioDaoImplements;
 import com.stock.thread.watchlist.WatchlistDao;
 import com.stock.thread.watchlist.WatchlistDaoImplements;
 
@@ -21,6 +23,8 @@ public class BeanConfiguration {
 	public StockService stockService() {
 		return new StockImplementation();
 	}
+	
+	 
 	/*@Bean
 	public SignUpController signUpController() {
 		return new SignUpController();
@@ -45,6 +49,11 @@ public class BeanConfiguration {
 	@Bean
 	public UserService userService() {
 		return new UserServiceImplementation();
+	}
+	
+	@Bean 
+	public PortfolioDao portfolioDao() {
+		return new PortfolioDaoImplements();
 	}
 
 	 

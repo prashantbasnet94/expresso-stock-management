@@ -58,4 +58,5 @@ export class SorterService {
     });
     return stocks;
   }
+
 }

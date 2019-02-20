@@ -8,7 +8,7 @@ import * as Chart from 'chart.js';
 })
 
 
-export class GraphComponent implements AfterViewInit {
+export class GraphComponent implements AfterViewInit{
   @Input() datasetlow: number[];
   @Input() datasethigh: number[];
   @Input() dataLabel: string[];

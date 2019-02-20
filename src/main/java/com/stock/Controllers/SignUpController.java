@@ -12,13 +12,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.stock.dao.User;
 import com.stock.service.StockService;
 import com.stock.service.UserService;
 
-@Controller
+@RestController
 @RequestMapping("user")
 public class SignUpController {
 //	private HibernateOperator hibernateOperator;
@@ -46,8 +48,8 @@ public class SignUpController {
  
 	
 	@PostMapping("/authenticate")
-	public String processForm(
-			 HttpServletRequest request,Model model, @Valid @ModelAttribute("data") User user,
+	public String processForm(@RequestBody User user,
+			 HttpServletRequest request,Model model, @Valid @ModelAttribute("data") User theuser,
 			BindingResult theBindingResult) {
 		
 	 
@@ -64,24 +66,21 @@ public class SignUpController {
 				
 				model.addAttribute("user_idExists",true);
 				System.out.println("User_id already exist");
-				System.out.println("<------------------------------------------------------");
+				return "Username already exist";
 			}  if(userService.checkEmailExists(user.getEmail())) {
 				model.addAttribute("emailExists",true);
 				System.out.println("email already exist");
-				System.out.println("<------------------------------------------------------");
+				return "Email already exist";
 			}
 			
-			
+			return "fail";
 		}else {
-				System.out.println("Userid is unique");
-				System.out.println("<------------------------------------------------------");
-				
-				System.out.println(userService.createUser(user));
-			
+			userService.createUser(user);
+			return "success";
+
 		}
-				
-		
-	return "/login";
+
+	 
 	 
 	}
  

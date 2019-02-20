@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Watchlist")
+@Table(name="Portfolio")
 public class StockPortfolio {
 	
 	public StockPortfolio() {
@@ -35,20 +35,23 @@ public class StockPortfolio {
 	@Column(name="ticker")
 	private String ticker;
 	
-	@Column(name="min")
-	private BigDecimal min;
+	@Column(name="bought")
+	private BigDecimal bought;
 	
-	@Column(name="max")
-	private BigDecimal max;
+	@Column(name="priceToday")
+	private BigDecimal priceToday;
 	
-	@Column(name="p_change")
-	private BigDecimal p_change;
+	@Column(name="difference")
+	private BigDecimal difference;
 	
-	@Column(name="margin")
+	@Column(name="supply")
 	private BigDecimal margin;
 	
 	@Column(name="price")
 	private BigDecimal price;
+
+	@Column(name="date")
+	private String date;
 
 	 
 
@@ -68,28 +71,28 @@ public class StockPortfolio {
 		this.ticker = ticker;
 	}
 
-	public BigDecimal getMin() {
-		return min;
+	public BigDecimal getbought() {
+		return bought;
 	}
 
-	public void setMin(BigDecimal min) {
-		this.min = min;
+	public void setbought(BigDecimal bought) {
+		this.bought = bought;
 	}
 
-	public BigDecimal getMax() {
-		return max;
+	public BigDecimal getpriceToday() {
+		return priceToday;
 	}
 
-	public void setMax(BigDecimal max) {
-		this.max = max;
+	public void setpriceToday(BigDecimal priceToday) {
+		this.priceToday = priceToday;
 	}
 
-	public BigDecimal getP_change() {
-		return p_change;
+	public BigDecimal getdifference() {
+		return difference;
 	}
 
-	public void setP_change(BigDecimal p_change) {
-		this.p_change = p_change;
+	public void setdifference(BigDecimal difference) {
+		this.difference = difference;
 	}
 
 	
@@ -110,18 +113,27 @@ public class StockPortfolio {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+	
+	public void setDate(String date) {
+		this.date = date;
+	}
 
-	public StockPortfolio(String userName, String name, String ticker, BigDecimal min, BigDecimal max, BigDecimal p_change,
-			BigDecimal margin, BigDecimal price) {
+	public String getDate() {
+		return date;
+	}
+
+	public StockPortfolio(String userName, String name, String ticker, BigDecimal bought, BigDecimal priceToday, BigDecimal difference,
+			BigDecimal margin, BigDecimal price,String date) {
 	 
 		this.userName = userName;
 		this.name = name;
 		this.ticker = ticker;
-		this.min = min;
-		this.max = max;
-		this.p_change = p_change;
+		this.bought = bought;
+		this.priceToday = priceToday;
+		this.difference = difference;
 		this.margin = margin;
 		this.price = price;
+		this.date = date;
 	}
  
 	

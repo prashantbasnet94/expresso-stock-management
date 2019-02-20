@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.stock.service.UserSecurityService;
 
@@ -49,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            "/console/**",
 	            "/user/signUp",
 	            "/user/authenticate",
-	            "/stock/**",
+	            "/stock/**"
 	           
 	    };
 	
@@ -62,16 +63,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          antMatchers(PUBLIC_MATCHERS).
          permitAll().anyRequest().authenticated();
     	
-        http .csrf().disable().cors().disable()
-            .authorizeRequests()
-            
-                .anyRequest().authenticated()
+        http 
+        .csrf().disable().cors().disable()
+//        .authorizeRequests()
+//        .anyRequest().authenticated()
+//        .and()
+            	.formLogin()
+                .loginPage("/login").defaultSuccessUrl("/portfolio").failureUrl("/failed").permitAll()
                 .and()
-            .formLogin()
-                .loginPage("/login").defaultSuccessUrl("/goodluck").failureUrl("/failed")
-                .permitAll()
-                .and()
-            .logout()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/index")
                 .permitAll();
     }
 

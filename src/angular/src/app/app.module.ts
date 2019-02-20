@@ -23,6 +23,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {PercentIconPipe} from './Pipes/percent-icon.pipe';
 import { DetailPageLogoDirective } from './directives/detail-page-logo.directive';
 import { FilterPipe } from './Pipes/filter.pipe';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FilterPipe } from './Pipes/filter.pipe';
     PercentChangeDirective,
     PercentIconPipe,
     DetailPageLogoDirective,
-    FilterPipe
+    FilterPipe,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,

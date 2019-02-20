@@ -1,4 +1,7 @@
+<app-navbar></app-navbar>
+
 <form class="form-inline waves-light" mdbWavesEffect>
+
   <div class="searchbar" *ngIf="pageLoaded">
     <input class="form-control" type="text" placeholder="Search stock" aria-label="Search"
            (input)="searchStock($event)" (click)="toggleDropDown()">
@@ -29,7 +32,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="pointerCursor" *ngFor="let stock of expressoService.stockList | paginate: {itemsPerPage:25, currentPage: p}"
+    <tr class="pointerCursor" *ngFor="let stock of stocks | paginate: {itemsPerPage:25, currentPage: p}"
         (click)="onSearchResultsClick(stock.ticker)">
       <td class="name">{{stock.name}}</td>
       <td class="ticker font-weight-bold">({{stock.ticker}})</td>
@@ -46,6 +49,6 @@
   </table>
 </div>
 
-<div class="pagination justify-content-center" *ngIf="pageLoaded">
+<div class="pagination justify-content-center align-middle" *ngIf="pageLoaded">
   <pagination-controls (pageChange)="p =$event" maxSize="12"></pagination-controls>
 </div>
