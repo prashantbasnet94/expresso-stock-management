@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.Authentication;
@@ -64,10 +66,13 @@ public class RestApiController {
 /* portfolio */
 	
 	//setting value in database for Portfolio
-		@GetMapping("createQuotePortfolio/{id}")
-		public List<com.stock.dao.StockPortfolio> createQuotePortfolio(@PathVariable String id,Principal pri,int quantity,int date) {
-			
-			
+		@PostMapping(path="createQuotePortfolio")
+		public List<com.stock.dao.StockPortfolio> createQuotePortfolio(@RequestBody Portfolio stock) {
+
+			String id = stock.getId();
+			Principal pri = stock.getPri();
+			int quantity = stock.getQuantity();
+			int date = stock.getDate();
 			
 			
 			return stockService.createQuotePortfolio(id,pri,quantity,date);
@@ -81,6 +86,10 @@ public class RestApiController {
 			return stockService.getQuotePortfolio(pri);
 		}
 		
-	
+		@PostMapping(path = "/test")
+		public String test(@RequestBody String user) {
+			System.out.println(user);
+			return null;
+		}
 	
 }

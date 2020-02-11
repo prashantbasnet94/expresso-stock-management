@@ -13,8 +13,17 @@ import javax.persistence.Table;
 @Table(name="Watchlist")
 public class StockPortfolio {
 	
-	public StockPortfolio() {
-		
+	public StockPortfolio(String userName, String name, String ticker, BigDecimal min, BigDecimal max, BigDecimal p_change,
+			BigDecimal margin, BigDecimal price) {
+	 
+		this.userName = userName;
+		this.name = name;
+		this.ticker = ticker;
+		this.min = min;
+		this.max = max;
+		this.p_change = p_change;
+		this.margin = margin;
+		this.price = price;
 	}
 
 	@Column(name="userName")
@@ -111,18 +120,7 @@ public class StockPortfolio {
 		this.price = price;
 	}
 
-	public StockPortfolio(String userName, String name, String ticker, BigDecimal min, BigDecimal max, BigDecimal p_change,
-			BigDecimal margin, BigDecimal price) {
-	 
-		this.userName = userName;
-		this.name = name;
-		this.ticker = ticker;
-		this.min = min;
-		this.max = max;
-		this.p_change = p_change;
-		this.margin = margin;
-		this.price = price;
-	}
+
  
 	
  

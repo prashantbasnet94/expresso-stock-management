@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Stock} from '../types/stock';
 import {ExpressoService} from '../services/expresso.service';
 import {Router} from '@angular/router';
@@ -13,27 +13,38 @@ import {ModalDirective} from 'angular-bootstrap-md';
 })
 export class WatchlistPageComponent implements OnInit {
   @ViewChild('basicModal') basicModal: ModalDirective;
+  @ViewChild('successModal') successModal: ModalDirective;
 
   stocks: Stock[] = [];
   watchlist: Stock[];
   tickerToAdd = 'No Stock to Add';
   noOfClicks = 0;
+  pageLoaded = false;
 
   constructor(private expressoService: ExpressoService, private router: Router, private sorter: SorterService) {
-    this.expressoService.getWatchlist()
-      .then(() => this.watchlist = this.expressoService.watchList);
   }
 
   ngOnInit() {
-    this.stocks = this.expressoService.stockList;
-
+    this.expressoService.getStocks()
+      .then(() => this.stocks = this.expressoService.stockList);
+    this.expressoService.getWatchlist()
+      .then(() => {
+        this.watchlist = this.expressoService.watchList;
+        console.log(this.watchlist);
+        this.pageLoaded = true;
+      });
   }
+
 
   addStockToWatchlist() {
     this.expressoService.addStockToWatchList(this.tickerToAdd)
       .then(() => {
         this.basicModal.hide();
-        this.tickerToAdd = '';
+        this.successModal.show();
+
+        setTimeout(() => {
+          this.successModal.hide();
+        }, 2000);
       })
       .then(() => this.watchlist = this.expressoService.watchList);
   }

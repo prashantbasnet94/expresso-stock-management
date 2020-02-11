@@ -21,6 +21,7 @@ export class IndexPageComponent implements OnInit {
   constructor(private expressoService: ExpressoService, private router: Router, private sorter: SorterService) {
     this.expressoService.getStocks()
       .then(() => {
+        this.stocks = this.expressoService.stockList;
         this.pageLoaded = true;
       });
   }
@@ -56,7 +57,6 @@ export class IndexPageComponent implements OnInit {
       this.stocks = this.sorter.sortNumberDescending(this.stocks, value);
     }
   }
-
 
   sortString(value) {
     if (this.noOfClicks % 2 === 0) {

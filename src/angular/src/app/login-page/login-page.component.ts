@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {NgForm} from '@angular/forms';
+import {ExpressoService} from '../services/expresso.service';
 
 @Component({
   selector: 'app-login-page',
@@ -7,16 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  email: string;
-  password: string;
-
-  constructor() { }
+  constructor(private service: ExpressoService) {
+  }
 
   ngOnInit() {
   }
 
-  submit(){
-    console.log(this.email);
-    console.log(this.password);
-  }
+  submit(f: NgForm) {
+
+    const value = f.value;
+
+    this.service.login(value)
+      .then(() => {
+        console.log('Successful');
+      });
+    }
 }

@@ -19,24 +19,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class User implements UserDetails {
 
 
- 
-
-	private String first_name;
-	
-
-	private String last_name;
-	
 	@Id
 	private String username;
-	
-
+	private String first_name;
+	private String last_name;
 	private String email;
-	
-
 	private String dob;
-	
 	private String password;
-	
 	private boolean enabled=true;
 	
 	

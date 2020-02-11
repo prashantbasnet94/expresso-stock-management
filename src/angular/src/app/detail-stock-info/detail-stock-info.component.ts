@@ -40,9 +40,6 @@ export class DetailStockInfoComponent implements OnInit {
       })
       .then(() => {
         this.pageLoaded = true;
-        console.log(this.company);
-        console.log(this.stock);
-        console.log(this.news);
       });
   }
 

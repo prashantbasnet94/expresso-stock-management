@@ -13,25 +13,25 @@
     <mdb-card-body class="px-lg-5 pt-0">
 
       <!-- Form -->
-      <form class="text-center" style="color: #757575;">
+      <form action="/login" class="text-center" style="color: #757575;" (ngSubmit)="submit(f)" #f="ngForm">
 
         <!-- Email -->
         <div class="md-form">
-          <input type="email" name="email" [(ngModel)]="email" class="form-control" mdbInputDirective [mdbValidate]="false">
-          <label>E-mail</label>
+          <input id="username" type="text" name="username" ngModel class="form-control" mdbInputDirective [mdbValidate]="false" required>
+          <label for="username">Username</label>
         </div>
 
         <!-- Password -->
         <div class="md-form">
-          <input type="password" name="password" [(ngModel)]="password"  class="form-control" mdbInputDirective [mdbValidate]="false">
-          <label >Password</label>
+          <input id="password" type="password" name="password" ngModel  class="form-control" mdbInputDirective [mdbValidate]="false" required>
+          <label for="password" >Password</label>
         </div>
 
         <div class="d-flex justify-content-around">
-          <div>
-            <!-- Remember me -->
-            <mdb-checkbox>Remember me</mdb-checkbox>
-          </div>
+          <!--<div>-->
+            <!--&lt;!&ndash; Remember me &ndash;&gt;-->
+            <!--<mdb-checkbox>Remember me</mdb-checkbox>-->
+          <!--</div>-->
           <div>
             <!-- Forgot password -->
             <a href="">Forgot password?</a>
@@ -39,7 +39,7 @@
         </div>
 
         <button mdbBtn color="info" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0"
-                (click)="submit()">Sign in</button>
+                type="submit" [disabled]="!f.valid">Sign in</button>
 
         <!-- Register -->
         <p>Not a member?

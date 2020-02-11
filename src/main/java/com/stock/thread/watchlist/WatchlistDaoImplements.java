@@ -49,7 +49,6 @@ public static   String  username;
 				     
 					try {
 						 
-				     
 				    	System.out.println("0000000000000000000000000000000000000000000000000000000000000000"+pri.getName());
 
 				

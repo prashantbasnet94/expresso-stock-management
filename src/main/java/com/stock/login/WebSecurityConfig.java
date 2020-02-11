@@ -47,9 +47,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	            "/contact/**",
 	            "/error/**/*",
 	            "/console/**",
-	            "/user/signUp",
+	            "/user/**",
 	            "/user/authenticate",
 	            "/stock/**",
+	            "/test/test"
 	           
 	    };
 	
@@ -63,12 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
          permitAll().anyRequest().authenticated();
     	
         http .csrf().disable().cors().disable()
-            .authorizeRequests()
-            
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
-                .loginPage("/login").defaultSuccessUrl("/goodluck").failureUrl("/failed")
+            .formLogin().loginPage("/login").defaultSuccessUrl("/goodluck").failureUrl("/failed")
                 .permitAll()
                 .and()
             .logout()
