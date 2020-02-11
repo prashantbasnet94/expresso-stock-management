@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <div class="register-page">
   <!-- Material form register -->
   <mdb-card class="register-box">
@@ -63,13 +65,13 @@
                  (input)="validPassword()" [disabled]="user.password.length<8">
           <label for="materialRegisterFormPassword">Confirm Password</label>
         </div>
-        <div class="form-text mb-4" style="color: #fc0d1b;">
-          <small *ngIf="validPassword()">
+        <div class="form-text mb-4" style="color: #fc0d1b;" *ngIf="user.password.length>8">
+          <small *ngIf="!validPassword()">
             Password does not match
           </small>
         </div>
         <div class="form-text mb-4" style="color: #03fc00;">
-          <small *ngIf="confirmPassword.length>0 && !validPassword()">
+          <small *ngIf="validPassword()">
             Password Matched
           </small>
         </div>
@@ -78,34 +80,15 @@
         <div>
           <input type="date" id="materialRegisterFormDate" name="dob" [(ngModel)]="user.dob" class="form-control"
                  [mdbValidate]="false" mdbInputDirective>
-          <label for="materialRegisterFormDate">Date of Birth</label>
+          <label for="materialRegisterFormDate">Date of Birth (Optional)</label>
 
         </div>
 
         <!-- Sign up button -->
         <button mdbBtn color="info" rounded="true" block="true" class="my-4 waves-effect z-depth-0"
-                mdbWavesEffect [disabled]="validPassword()"
+                mdbWavesEffect [disabled]="!validInput()"
                 type="submit" (click)="register()">Sign in
         </button>
-
-        <!--&lt;!&ndash; Social register &ndash;&gt;-->
-        <!--<p>or sign up with:</p>-->
-
-        <!--<a type="button" class="light-blue-text mx-2">-->
-        <!--<mdb-icon icon="facebook"></mdb-icon>-->
-        <!--</a>-->
-        <!--<a type="button" class="light-blue-text mx-2">-->
-        <!--<mdb-icon icon="google"></mdb-icon>-->
-        <!--</a>-->
-
-        <!--<hr>-->
-
-        <!--&lt;!&ndash; Terms of service &ndash;&gt;-->
-        <!--<p>By clicking-->
-        <!--<em>Sign up</em> you agree to our-->
-        <!--<a href="" target="_blank">terms of service</a> and-->
-        <!--<a href="" target="_blank">terms of service</a>. </p>-->
-
       </form>
       <!-- Form -->
 
@@ -115,3 +98,21 @@
   <!-- Material form register -->
 
 </div>
+<div mdbModal #successModal="mdbModal" class="modal fade right" tabindex="-1" role="dialog" aria-labelledby="mySuccessModal"
+     aria-hidden="true">
+   <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="successModal.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <h4>{{message}}</h4>
+        </div>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="danger" class="waves-light" aria-label="Close" (click)="successModal.hide()" mdbWavesEffect>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

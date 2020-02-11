@@ -14,6 +14,7 @@ import {ModalDirective} from 'angular-bootstrap-md';
 export class WatchlistPageComponent implements OnInit {
   @ViewChild('basicModal') basicModal: ModalDirective;
   @ViewChild('successModal') successModal: ModalDirective;
+   @ViewChild('deleteModal') deleteModal: ModalDirective;
 
   stocks: Stock[] = [];
   watchlist: Stock[];
@@ -22,9 +23,19 @@ export class WatchlistPageComponent implements OnInit {
   pageLoaded = false;
 
   constructor(private expressoService: ExpressoService, private router: Router, private sorter: SorterService) {
-  }
+   tickerToRemove = 'None';
+  message = '??';
 
-  ngOnInit() {
+  constructor(private expressoService: ExpressoService, private router: Router, private sorter: SorterService); {
+    this.expressoService.loggedIn()
+      .then(() => {
+        if (this.expressoService.userLoggedIn === false) {
+          return this.router.navigate(['signin']);
+        }
+      });
+   }
+
+  ngOnInit(); {
     this.expressoService.getStocks()
       .then(() => this.stocks = this.expressoService.stockList);
     this.expressoService.getWatchlist()
@@ -36,9 +47,10 @@ export class WatchlistPageComponent implements OnInit {
   }
 
 
-  addStockToWatchlist() {
+  addStockToWatchlist(); {
     this.expressoService.addStockToWatchList(this.tickerToAdd)
       .then(() => {
+        this.message = 'Successfully added ' + this.tickerToAdd + ' on Watchlist!';
         this.basicModal.hide();
         this.successModal.show();
 
@@ -46,14 +58,14 @@ export class WatchlistPageComponent implements OnInit {
           this.successModal.hide();
         }, 2000);
       })
-      .then(() => this.watchlist = this.expressoService.watchList);
+      .then(() => location.reload());
   }
 
-  stockDetails(ticker) {
+  stockDetails(ticker); {
     return this.router.navigate(['/index/' + ticker]);
   }
 
-  sortNumber(value) {
+  sortNumber(value); {
     if (this.noOfClicks % 2 === 0) {
       this.noOfClicks++;
       this.watchlist = this.sorter.sortNumberAscending(this.stocks, value);
@@ -64,7 +76,7 @@ export class WatchlistPageComponent implements OnInit {
   }
 
 
-  sortString(value) {
+  sortString(value); {
     if (this.noOfClicks % 2 === 0) {
       this.noOfClicks++;
       this.watchlist = this.sorter.sortStringByAscendingOrder(this.stocks, value);
@@ -74,4 +86,18 @@ export class WatchlistPageComponent implements OnInit {
     }
   }
 
+  removeStock(); {
+    this.expressoService.removeStockFromWatchlist(this.tickerToRemove)
+      .then(() => {
+        this.deleteModal.hide();
+        this.message = 'Successfully deleted ' + this.tickerToRemove + ' from Watchlist!';
+        this.successModal.show();
+        setTimeout(() => {
+          this.successModal.hide();
+        }, 2000);
+      })
+      .then(() => location.reload());
+  }
 }
+
+

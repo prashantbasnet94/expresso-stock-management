@@ -13,6 +13,8 @@ public interface WatchlistDao {
  
 	List<StockWatchlist> getQuoteWatchlist(Principal pri);
 
+	List<StockWatchlist> deleteQuoteWatchlist(String ticker, Principal pri);
+
  
 	
 	 

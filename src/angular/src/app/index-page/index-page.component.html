@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <form class="form-inline waves-light" mdbWavesEffect>
 
   <div class="searchbar" *ngIf="pageLoaded">
@@ -47,6 +49,6 @@
   </table>
 </div>
 
-<div class="pagination justify-content-center" *ngIf="pageLoaded">
+<div class="pagination justify-content-center align-middle" *ngIf="pageLoaded">
   <pagination-controls (pageChange)="p =$event" maxSize="12"></pagination-controls>
 </div>

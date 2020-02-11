@@ -1,4 +1,4 @@
-/*package com.stock.login;
+package com.stock.login;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -48,4 +48,3 @@ public class RequestFilter implements Filter {
     public void destroy() {}
 
 }
-*/

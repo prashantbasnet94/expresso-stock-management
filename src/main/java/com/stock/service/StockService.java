@@ -1,5 +1,6 @@
 package com.stock.service;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -26,10 +27,16 @@ public interface StockService {
 	
 	List<StockWatchlist> createQuoteWatchlist(String ticker, Principal pri); 
 
+	List<StockWatchlist> deleteQuoteWatchlist(String ticker, Principal pri); 
+
 	public List<StockWatchlist> getQuoteWatchlist(Principal pri);
 
-	public List<StockPortfolio> createQuotePortfolio(String ticker, Principal pri, int quantity, int date);
+	public List<StockPortfolio> createQuotePortfolio(String ticker, Principal pri, BigDecimal quantity, String date, BigDecimal pricePaid);
 
 	public List<StockPortfolio> getQuotePortfolio(Principal pri);
+
+	public List<StockPortfolio> deleteQuotePortfolio(String id, Principal pri);
+
+	public List<User> getUserDetails(Principal pri);
 
 }

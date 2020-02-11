@@ -1,5 +1,6 @@
 package com.stock.service;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class StockImplementation implements StockService {
  
   
 		return stockDao.createQuoteWatchlist(ticker,pri);
+		
 	}
 
 	
@@ -72,11 +74,20 @@ public class StockImplementation implements StockService {
 		return stockDao.getQuoteWatchlist(pri);
 	}
 	
+	
+	@Override
+	public List<StockWatchlist> deleteQuoteWatchlist(String ticker, Principal pri) {
+		return stockDao.deleteQuoteWatchlist(ticker,pri);
+	}
+	 
+	
+	
 //portfolio
 	@Override
-	public List<StockPortfolio> createQuotePortfolio(String ticker, Principal pri, int quantity, int date) {
-		// TODO Auto-generated method stub
-		return stockDao.createQuotePortfolio(ticker,pri,quantity,date);
+	public List<StockPortfolio> createQuotePortfolio(String ticker, Principal pri, BigDecimal quantity, String date,BigDecimal pricePaid){
+		
+	// TODO Auto-generated method stub
+		return stockDao.createQuotePortfolio(ticker,pri,quantity,date,pricePaid);
 	}
 
 	@Override
@@ -84,7 +95,18 @@ public class StockImplementation implements StockService {
 		// TODO Auto-generated method stub
 		return stockDao.getQuotePortfolio(pri);
 	}
-	 
+
+	public List<StockPortfolio> deleteQuotePortfolio(String id, Principal pri) {
+		return stockDao.deleteQuotePortfolio(id,pri);	
+		}
+
+	@Override
+	public List<User> getUserDetails(Principal pri) {
+		// TODO Auto-generated method stub
+		return stockDao.getUserDetails(pri);
+	}
+
+	
 	 
 	
 	

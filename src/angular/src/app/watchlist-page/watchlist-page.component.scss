@@ -84,5 +84,13 @@ div.watchlist{
     background: linear-gradient( rgb(248, 248, 248), rgb(209, 209, 209));
   }
 
+  select.select{
+    max-width: 400px;
+    overflow: hidden;
+  }
 
+  select option.options{
+    max-width: 400px;
+    overflow: hidden;
+  }
 }

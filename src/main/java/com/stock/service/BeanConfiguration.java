@@ -23,6 +23,8 @@ public class BeanConfiguration {
 	public StockService stockService() {
 		return new StockImplementation();
 	}
+	
+	 
 	/*@Bean
 	public SignUpController signUpController() {
 		return new SignUpController();
@@ -47,6 +49,11 @@ public class BeanConfiguration {
 	@Bean
 	public UserService userService() {
 		return new UserServiceImplementation();
+	}
+	
+	@Bean 
+	public PortfolioDao portfolioDao() {
+		return new PortfolioDaoImplements();
 	}
 
 	@Bean 

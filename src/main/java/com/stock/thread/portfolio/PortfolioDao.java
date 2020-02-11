@@ -1,5 +1,6 @@
 package com.stock.thread.portfolio;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -14,7 +15,9 @@ public interface PortfolioDao {
 
 	List<StockPortfolio> getQuotePortfolio(Principal pri);
 
-	List<StockPortfolio> createQuotePortfolio(String ticker, Principal pri, int quantity, int date);
+	List<StockPortfolio> createQuotePortfolio(String ticker, Principal pri, BigDecimal quantity, String date, BigDecimal pricePaid);
+
+	List<StockPortfolio> deleteQuotePortfolio(String id, Principal pri);
 
  
 	

@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: '', component: IndexPageComponent},
   {path: 'portfolio', component: PortfolioPageComponent},
   {path: 'watchlist', component: WatchlistPageComponent},
-  {path: 'login', component: LoginPageComponent},
+  {path: 'signin', component: LoginPageComponent},
   {path: 'register', component: RegisterPageComponent},
   {path: 'forum', component: ForumPageComponent},
   {path: 'index/:ticker', component: DetailStockInfoComponent},

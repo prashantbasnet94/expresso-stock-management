@@ -1,5 +1,6 @@
 package com.stock.restGetDao;
 
+import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
 
@@ -14,7 +15,8 @@ import org.springframework.stereotype.Repository;
 import com.stock.dao.StockIndex;
 import com.stock.dao.StockPortfolio;
 import com.stock.dao.StockWatchlist;
- 
+import com.stock.dao.User;
+
 import org.springframework.stereotype.Repository;
 
 import com.stock.dao.StockIndex;
@@ -48,8 +50,7 @@ private PortfolioDao portfolioDao;
 		session.beginTransaction();
 		
 		List<StockIndex> quote =session.createQuery("from StockIndex").getResultList();
-		System.out.println(quote);
-		System.out.println("*******************************************************");
+ 		System.out.println("*******************************************************");
 		
 		session.getTransaction().commit();
 		
@@ -119,12 +120,17 @@ private PortfolioDao portfolioDao;
  
 	}
 
+	@Override
+	public List<StockWatchlist> deleteQuoteWatchlist(String ticker, Principal pri) {
+		return watchlistDao.deleteQuoteWatchlist(ticker,pri);
+		
+	}
 	
 //portfolio
 	@Override
-	public List<StockPortfolio> createQuotePortfolio(String ticker, Principal pri, int quantity,int date) {
+	public List<StockPortfolio> createQuotePortfolio(String ticker, Principal pri, BigDecimal quantity,String date,BigDecimal pricePaid) {
 		// TODO Auto-generated method stub
-		return portfolioDao.createQuotePortfolio(ticker,pri,quantity,date);
+		return portfolioDao.createQuotePortfolio(ticker,pri,quantity,date,pricePaid);
 		
 	}
 
@@ -134,4 +140,38 @@ private PortfolioDao portfolioDao;
 		return portfolioDao.getQuotePortfolio(pri);
 		 
 	}
+
+	@Override
+	public List<StockPortfolio> deleteQuotePortfolio(String id, Principal pri) {
+		// TODO Auto-generated method stub
+		System.out.println("((((((((((((((((((((((((((((((((((((((((");
+		System.out.println(id);
+		System.out.println(pri);
+		return portfolioDao.deleteQuotePortfolio(id,pri);
+	}
+
+	@Override
+	public List<User> getUserDetails(Principal pri) {
+		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(com.stock.dao.User.class).buildSessionFactory();
+		Session session = factory.getCurrentSession();
+		
+		session.beginTransaction();
+		
+		List<com.stock.dao.User> user =session.createQuery("from com.stock.dao.User s where s.username='"+pri.getName()+"'").getResultList(); ;
+		try {
+			
+			System.out.println("-----------------------------------------------------"+user.toString());
+			
+			session.getTransaction().commit();
+			
+			
+			factory.close();
+			 
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+
+	
 }
